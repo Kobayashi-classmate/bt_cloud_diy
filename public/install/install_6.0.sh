@@ -977,7 +977,7 @@ Set_Bt_Panel(){
 		lsattr python3.7 python
 		Red_Error "ERROR: The BT-Panel service startup failed." "ERROR: 宝塔启动失败"
 	fi
-
+	sleep 5
 	if [ "$PANEL_USER" ];then
 		cd ${setup_path}/server/panel/
 		btpython -c 'import tools;tools.set_panel_username("'$PANEL_USER'")'
