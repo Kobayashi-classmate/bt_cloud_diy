@@ -48,7 +48,7 @@
 
 - 访问 官方WAF的api接口域名/bt_waf/latest_version 获取最新版本信息
 - 将返回的 data 的内容复制一下
-- 访问 btcloud域名/bt_waf/decrypt_version?encryptionData= 将data的内容复制到'='后面，没有空格，将会返回版本号相关信息，然后修改对应文件内容即可
+- 访问 btcloud域名/bt_waf/decrypt_version?encryptionData= 将data的内容复制到`=`后面，没有空格，将会返回版本号相关信息，然后修改对应文件内容即可
 
 ## 其他
 
