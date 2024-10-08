@@ -20,7 +20,7 @@ Route::any('/bt_monitor/latest_version', 'api/btm_latest_version');
 Route::any('/bt_waf/get_malicious_ip', 'api/get_ssl_list');
 Route::any('/bt_waf/daily_count_v2', 'api/get_ssl_list');
 Route::any('/bt_waf/latest_version', 'api/btwaf_latest_version');
-Route::any('/bt_waf/decrypt_version', 'api/decrypt_version');
+Route::any('/bt_waf/decrypt_version', 'api/btwaf_decrypt_version');
 
 Route::group('authorization', function () {
     Route::post('/login', 'api/authorization_login');
