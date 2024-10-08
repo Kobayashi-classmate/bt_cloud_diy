@@ -226,6 +226,20 @@ class Api extends BaseController
         ];
         return json($data);
     }
+    
+    //解密宝塔云WAF最新版本
+    public function btwaf_decrypt_version(){
+        if(request()->isPost()){
+            $encryptionData = input('post.encryptionData',null,'trim');
+            $decryptData = json_decode(hex2bin($encryptionData));
+            return json(['msg'=>'获取成功','data'=>$decryptData,'status'=>true,'err_no'=>0]);
+        } elseif(request()->isGet()){
+            $encryptionData = input('param.encryptionData',null,'trim');
+            $decryptData = json_decode(hex2bin($encryptionData));
+            return json(['msg'=>'获取成功','data'=>$decryptData,'status'=>true,'err_no'=>0]);
+        }
+        return json(['msg'=>'请求错误','status'=>false]);
+    }
 
     //宝塔云WAF最新版本
     public function btwaf_latest_version(){
