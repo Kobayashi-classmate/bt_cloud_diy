@@ -252,9 +252,9 @@ class Api extends BaseController
             ];
         }else{
             $data = [
-                'version' => '3.0',
-                'description' => '暂无更新日志',
-                'create_time' => 1705315163,
+                'version' => '4.8',
+                'description' => '【优化】优化CC策略：修复URL级CC防御启用后不关闭的问题【修复】修复扫描器拦截错误',
+                'create_time' => 1723789286
             ];
         }
         $data = bin2hex(json_encode($data));
