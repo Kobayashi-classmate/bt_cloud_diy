@@ -42,13 +42,13 @@
 - [下载最新版的Release包](https://github.com/flucont/btcloud/releases)
 - 上传覆盖除data文件夹以外的全部文件
 - 后台使用批量替换工具->获取最新插件列表->修改Linux面板等版本号
-- 将本仓库修改内容复制进对应文件中即可
+- 将本仓库修改内容复制进对应文件中即可（或者直接把本仓库的文件上传覆盖除data文件夹）
 
 ## 获取WAF版本号
 
-- 访问 官方WAF的api接口域名/bt_waf/latest_version 获取最新版本信息
-- 将返回的 data 的内容复制一下
-- 访问 btcloud域名/bt_waf/decrypt_version?encryptionData= 将data的内容复制到`=`后面，没有空格，将会返回版本号相关信息，然后修改对应文件内容即可
+- 访问  `官方WAF的api接口域名/bt_waf/latest_version` 获取最新版本信息
+- 将返回的 `data` 的内容复制一下
+- 访问 `btcloud域名/bt_waf/decrypt_version?encryptionData=` 将data的内容复制到`=`后面，没有空格，将会返回版本号相关信息，然后修改对应文件内容即可
 
 ## 其他
 
