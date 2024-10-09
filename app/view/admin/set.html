@@ -126,6 +126,20 @@ name="main"}
           role="form"
         >
           <div class="form-group">
+            <label>版本信息解析：</label>
+            <input
+              type="text"
+              name="waf_encryptiondata"
+              class="form-control"
+            />
+            <font color="green">将从官方接口获取的信息："data":"此处双引号内的内容复制粘贴至文本框内"</font>
+			<div class="form-group text-center">
+			  <button type="button" class="btn btn-info btn-block" id="decryptmsg">
+				解析内容
+			  </button>
+			</div>
+		  </div>
+		  <div class="form-group">
             <label>云WAF最新版本号：</label>
             <input
               type="text"
@@ -155,7 +169,7 @@ name="main"}
               value="{:config_get('waf_update_date')}"
               class="form-control"
             />
-            <font color="green">用于检测更新接口返回</font>
+            <font color="green">用于检测更新接口返回，修改时需符合当前数据格式（请勿随意更改此处格式，以免无法正常获取更新信息）</font>
           </div>
           <div class="form-group text-center">
             <input
@@ -890,7 +904,39 @@ name="main"}
               layer.msg("服务器错误");
             },
           });
-        }
+        }		
+		$("#decryptmsg").click(function () {
+            var encryptiondata = $("input[name=waf_encryptiondata]").val();
+            if (encryptiondata == "") {
+              layer.alert("需解析信息不能为空");
+              return;
+            }
+            var postdata = {
+				encryptiondata: encryptiondata
+            };
+            var ii = layer.load(2, { shade: [0.1, "#fff"] });
+            $.ajax({
+              type: "POST",
+              url: "/admin/decrypt_version",
+              data: postdata,
+              dataType: "json",
+              success: function (data) {
+                layer.close(ii);
+                if (data.code == 0) {
+                  layer.msg(data.msg, {icon: 1, closeBtn: false},
+                  function () {
+                    window.location.reload();
+                  });
+                } else {
+                  layer.alert(data.msg, { icon: 2 });
+                }
+              },
+              error: function (data) {
+                layer.close(ii);
+                layer.msg("服务器错误");
+              },
+            });
+          });
       </script>
       {/block}
     </div>

@@ -24,8 +24,8 @@ INSERT INTO `cloud_config` (`key`, `value`) VALUES
 ('updateall_type', '0'),
 ('syskey', 'UqP94LtI8eWAIgCP');
 ('waf_version', '4.8');
-('waf_description', '【优化】优化CC策略：修复URL级CC防御启用后不关闭的问题<br/>【修复】修复扫描器拦截错误');
-('waf_create_time', '1723789286');
+('waf_description', '暂无更新日志');
+('waf_create_time', '2024-08-16 14:21:26');
 
 
 DROP TABLE IF EXISTS `cloud_black`;

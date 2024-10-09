@@ -20,7 +20,6 @@ Route::any('/bt_monitor/latest_version', 'api/btm_latest_version');
 Route::any('/bt_waf/get_malicious_ip', 'api/get_ssl_list');
 Route::any('/bt_waf/daily_count_v2', 'api/get_ssl_list');
 Route::any('/bt_waf/latest_version', 'api/btwaf_latest_version');
-Route::any('/bt_waf/decrypt_version', 'api/btwaf_decrypt_version');
 
 Route::group('authorization', function () {
     Route::post('/login', 'api/authorization_login');
@@ -138,6 +137,7 @@ Route::get('/admin/logout', 'admin/logout');
 Route::group('admin', function () {
     Route::get('/', 'admin/index');
     Route::any('/set', 'admin/set');
+    Route::post('/decrypt_version', 'admin/btwaf_decrypt_version');
     Route::post('/setaccount', 'admin/setaccount');
     Route::post('/testbturl', 'admin/testbturl');
     Route::get('/plugins', 'admin/plugins');

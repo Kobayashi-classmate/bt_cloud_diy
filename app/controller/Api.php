@@ -5,8 +5,6 @@ use think\facade\Db;
 use app\BaseController;
 use app\lib\Plugins;
 
-use think\facade\Cache;
-
 class Api extends BaseController
 {
 
@@ -251,29 +249,6 @@ class Api extends BaseController
             ]
         ];
         return json($data);
-    }
-
-    //解密宝塔云WAF最新版本
-    public function btwaf_decrypt_version()
-    {
-        if (request()->isPost()) {
-            $encryptionData = input('post.encryptionData', null, 'trim');
-            $decryptData = json_decode(hex2bin($encryptionData));
-            config_set('waf_new_version', $decryptData->version);
-            config_set('waf_update_msg', $decryptData->description);
-            config_set('waf_update_date', date('Y-m-d H:i:s', $decryptData->create_time));
-            Cache::clear();
-            return json(['msg' => '数据更新成功', 'data' => $decryptData, 'status' => true, 'err_no' => 0]);
-        } elseif (request()->isGet()) {
-            $encryptionData = input('param.encryptionData', null, 'trim');
-            $decryptData = json_decode(hex2bin($encryptionData));
-            config_set('waf_new_version', $decryptData->version);
-            config_set('waf_update_msg', $decryptData->description);
-            config_set('waf_update_date', date('Y-m-d H:i:s', $decryptData->create_time));
-            Cache::clear();
-            return json(['msg' => '数据更新成功', 'data' => $decryptData, 'status' => true, 'err_no' => 0]);
-        }
-        return json(['msg' => '请求错误', 'status' => false]);
     }
 
     //宝塔云WAF最新版本
