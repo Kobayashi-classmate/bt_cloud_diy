@@ -131,15 +131,10 @@ Route::group('api', function () {
     Route::miss('api/return_error');
 });
 
-// Route::get(config_get("backaddress") + '/verifycode', 'admin/verifycode')->middleware(\think\middleware\SessionInit::class);
-// Route::any(config_get("backaddress") + '/login', 'admin/login')->middleware(\think\middleware\SessionInit::class);
+Route::get(config_get("backaddress") . '/verifycode', 'admin/verifycode')->middleware(\think\middleware\SessionInit::class);
+Route::any(config_get("backaddress") . '/login', 'admin/login')->middleware(\think\middleware\SessionInit::class);
 
-Route::group(config_get("backaddress"), function () {
-    Route::get('/verifycode', 'admin/verifycode');
-    Route::any('/login', 'admin/login');
-})->middleware(\think\middleware\SessionInit::class);
-
-Route::group(config_get("backaddress"), function () {
+Route::group('/' . config_get("backaddress"), function () {
     Route::get('/', 'admin/index');
     Route::any('/set', 'admin/set');
     Route::post('/decrypt_version', 'admin/btwaf_decrypt_version');
