@@ -207,6 +207,11 @@
                     <label>管理员密码</label>
                     <input type="text" name="admin_password" value="123456" required="">
                 </div>
+
+                <div class="form-field">
+                    <label>后台访问地址</label>
+                    <input type="text" name="backaddress" value="admin" required="">
+                </div>
             </div>
 
             <div class="form-buttons">
@@ -242,7 +247,7 @@
                         $("#warmtips").show();
 
                         $buttons = $(".form-buttons", form);
-                        $('<a class="btn" href="/admin" style="background:#4e73df">进入后台</a>').appendTo($buttons);
+                        $('<a class="btn" href="/{:config_get('backaddress')}" style="background:#4e73df">进入后台</a>').appendTo($buttons);
 
                     } else {
                         $error.show().text(ret.msg);

@@ -32,41 +32,41 @@
       <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav navbar-right">
           <li class="{:checkIfActive('index')}">
-            <a href="/admin"><i class="fa fa-home"></i> 后台首页</a>
+            <a href="/{:config_get('backaddress')}"><i class="fa fa-home"></i> 后台首页</a>
           </li>
           <li class="{:checkIfActive('plugins,pluginswin,deplist')}">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cubes"></i> 插件列表<b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li class="{:checkIfActive('plugins')}"><a href="/admin/plugins">Linux面板</a></li>
-              <li class="{:checkIfActive('pluginswin')}"><a href="/admin/pluginswin">Windows面板</a></li>
-              <li class="{:checkIfActive('deplist')}"><a href="/admin/deplist">一键部署列表</a></li>
+              <li class="{:checkIfActive('plugins')}"><a href="/{:config_get('backaddress')}/plugins">Linux面板</a></li>
+              <li class="{:checkIfActive('pluginswin')}"><a href="/{:config_get('backaddress')}/pluginswin">Windows面板</a></li>
+              <li class="{:checkIfActive('deplist')}"><a href="/{:config_get('backaddress')}/deplist">一键部署列表</a></li>
             </ul>
           </li>
           <li class="{:checkIfActive('record')}">
-            <a href="/admin/record"><i class="fa fa-list"></i> 使用记录</a>
+            <a href="/{:config_get('backaddress')}/record"><i class="fa fa-list"></i> 使用记录</a>
           </li>
           <li class="{:checkIfActive('list')}">
-            <a href="/admin/list"><i class="fa fa-globe"></i> 黑白名单</a>
+            <a href="/{:config_get('backaddress')}/list"><i class="fa fa-globe"></i> 黑白名单</a>
           </li>
           <li class="{:checkIfActive('log')}">
-            <a href="/admin/log"><i class="fa fa-calendar"></i> 操作日志</a>
+            <a href="/{:config_get('backaddress')}/log"><i class="fa fa-calendar"></i> 操作日志</a>
           </li>
           <li class="{:checkIfActive('ssl')}">
-            <a href="/admin/ssl"><i class="fa fa-expeditedssl"></i> 自签SSL</a>
+            <a href="/{:config_get('backaddress')}/ssl"><i class="fa fa-expeditedssl"></i> 自签SSL</a>
           </li>
           <li class="{:checkIfActive('set')}">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cog"></i> 系统设置<b
                 class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li><a href="/admin/set">软件版本设置</a></li>
-              <li><a href="/admin/set/mod/api">面板接口设置</a></li>
-              <li><a href="/admin/set/mod/task">自动更新插件设置</a></li>
-              <li><a href="/admin/set/mod/tools">替换与清理工具</a></li>
-              <li><a href="/admin/set/mod/account">管理账号设置</a></li>
+              <li><a href="/{:config_get('backaddress')}/set">软件版本设置</a></li>
+              <li><a href="/{:config_get('backaddress')}/set/mod/api">面板接口设置</a></li>
+              <li><a href="/{:config_get('backaddress')}/set/mod/task">自动更新插件设置</a></li>
+              <li><a href="/{:config_get('backaddress')}/set/mod/tools">替换与清理工具</a></li>
+              <li><a href="/{:config_get('backaddress')}/set/mod/account">管理账号设置</a></li>
             </ul>
           </li>
           <li>
-            <a href="/admin/logout" onclick="return confirm('确定退出登录吗？')"><i class="fa fa-power-off"></i> 退出登录</a>
+            <a href="/{:config_get('backaddress')}/logout" onclick="return confirm('确定退出登录吗？')"><i class="fa fa-power-off"></i> 退出登录</a>
           </li>
         </ul>
       </div><!-- /.navbar-collapse -->

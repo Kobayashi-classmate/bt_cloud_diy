@@ -4,6 +4,7 @@ use think\facade\Route;
 
 Route::get('/', 'index/index');
 Route::get('/download', 'index/download');
+Route::get('/btcode', 'index/btcode');
 
 
 Route::any('/panel/get_plugin_list', 'api/get_plugin_list');

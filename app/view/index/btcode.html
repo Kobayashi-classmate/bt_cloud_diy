@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>宝塔面板安装脚本</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/sanren.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/download.css" />
+    <style type="text/css">
+      .btcode pre {
+        background: #e6e9ed;
+        border-left: 5px solid #20a53a;
+        color: #222;
+        font: 12px/20px Consolas, "Courier New", Courier, monospace;
+        margin: 10px 0 25px;
+        overflow: hidden;
+        overflow-wrap: break-word;
+        padding-left: 15px;
+        min-height: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        white-space: pre-wrap;
+      }
+      .code-title {
+        border: 1px solid #ddd;
+        position: fixed;
+        right: 20px;
+        top: 340px;
+        border-radius: 4px;
+      }
+      .code-title h3 {
+        padding: 0 15px;
+        font-size: 14px;
+        line-height: 36px;
+        background-color: #f0f0f0;
+        border-bottom: #ddd 1px solid;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="down-main">
+      <div class="d4" id="instal-windows" style="background-color: #edf6ef">
+        <div class="wrap">
+          <div class="wrap-title">
+            <div class="text">宝塔命令大全</div>
+          </div>
+          <div class="code-title">
+            <h3>目录</h3>
+            <div class="code-list">
+              <ul>
+                <li>
+                  <a href="/btcode/#install">安装宝塔</a>
+                </li>
+                <li>
+                  <a href="/btcode/#main">管理宝塔</a>
+                </li>
+                <li>
+                  <a href="/btcode/#nginx">Nginx服务管理</a>
+                </li>
+                <li>
+                  <a href="/btcode/#apache">Apache服务管理</a>
+                </li>
+                <li>
+                  <a href="/btcode/#mysql">MySQL服务管理</a>
+                </li>
+                <li>
+                  <a href="/btcode/#ftp">FTP服务管理</a>
+                </li>
+                <li>
+                  <a href="/btcode/#php">PHP服务管理</a>
+                </li>
+                <li>
+                  <a href="/btcode/#redis">Redis服务管理</a>
+                </li>
+                <li>
+                  <a href="/btcode/#memcached">Memcached服务管理</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="desc">
+            <a name="install" href="/download">
+              <h2 class="th2">安装宝塔</h2></a
+            >
+            <div class="btcode">
+              <span>Centos安装脚本</span>
+              <pre class="installcode">
+yum install -y wget &amp;&amp; wget -O install.sh {$siteurl}/install/install_6.0.sh &amp;&amp; sh install.sh</pre
+              >
+              <span>Ubuntu/Deepin安装脚本</span>
+              <pre class="installcode">
+wget -O install.sh {$siteurl}/install/install_6.0.sh &amp;&amp; bash install.sh</pre
+              >
+              <span>一键更新脚本</span>
+              <pre class="installcode">
+curl {$siteurl}/install/update6.sh|bash</pre
+              >
+            </div>
+            <a name="main" href="/btcode/#main">
+              <h2 class="th2" id="reset-password">管理宝塔</h2>
+            </a>
+            <div class="btcode">
+              <span
+                >宝塔工具箱/找回密码/修改密码<span class="info"
+                  >(包含下列绝大部分功能，直接ssh中执行bt命令，按回车下一步。仅限6.x以上版本面板)</span
+                ></span
+              >
+              <pre>bt</pre>
+              <pre><p>
+===============宝塔面板命令行==================
+(1) 重启面板服务            (8) 改面板端口
+(2) 停止面板服务            (9) 清除面板缓存
+(3) 启动面板服务            (10) 清除登录限制
+(4) 重载面板服务            (11) 设置是否开启IP + User-Agent验证
+<b style="color:red"><u>(5) 修改面板密码</u></b>            (12) 取消域名绑定限制
+(6) 修改面板用户名          (13) 取消IP访问限制
+(7) 强制修改MySQL密码       <b>(14) 查看面板默认信息</b>
+(22) 显示面板错误日志        (15) 清理系统垃圾
+(23) 关闭BasicAuth认证      (16) 修复面板(检查错误并更新面板文件到最新版)
+(24) 关闭动态口令认证        (17) 设置日志切割是否压缩
+(25) 设置是否保存文件历史副本 (18) 设置是否自动备份面板
+(26) 关闭面板ssl            (28) 修改面板安全入口
+(0) 取消                   (29) 取消访问设备验证
+===============================================
+请输入命令编号：
+按回车键下一步
+	</p><p></p></pre>
+              <span>停止</span>
+              <pre>/etc/init.d/bt stop</pre>
+              <span>启动</span>
+              <pre>/etc/init.d/bt start</pre>
+              <span>重启</span>
+              <pre>/etc/init.d/bt restart</pre>
+              <span>卸载</span>
+              <pre>
+/etc/init.d/bt stop &amp;&amp; chkconfig --del bt &amp;&amp; rm -f /etc/init.d/bt &amp;&amp; rm -rf /www/server/panel</pre
+              >
+              <span>查看当前面板端口</span>
+              <pre>cat /www/server/panel/data/port.pl</pre>
+              <span>修改面板端口，如要改成8881（centos 6 系统）</span>
+              <pre>
+echo '8881' &gt; /www/server/panel/data/port.pl &amp;&amp; /etc/init.d/bt restart
+iptables -I INPUT -p tcp -m state --state NEW -m tcp --dport 8881 -j ACCEPT
+service iptables save
+service iptables restart</pre
+              >
+              <span>修改面板端口，如要改成8881（centos 7 系统）</span>
+              <pre>
+echo '8881' &gt; /www/server/panel/data/port.pl &amp;&amp; /etc/init.d/bt restart
+firewall-cmd --permanent --zone=public --add-port=8881/tcp
+firewall-cmd --reload</pre
+              >
+              <span>强制修改MySQL管理(root)密码，如要改成123456</span>
+              <pre>
+cd /www/server/panel &amp;&amp; python tools.py root 123456</pre
+              >
+              <span>修改面板密码，如要改成123456</span>
+              <pre>
+cd /www/server/panel &amp;&amp; python tools.py panel 123456</pre
+              >
+              <span>查看宝塔日志</span>
+              <pre>cat /tmp/panelBoot.pl</pre>
+              <span>查看软件安装日志</span>
+              <pre>cat /tmp/panelExec.log</pre>
+              <span>站点配置文件位置</span>
+              <pre>/www/server/panel/vhost</pre>
+              <span>删除域名绑定面板</span>
+              <pre>rm -f /www/server/panel/data/domain.conf</pre>
+              <span>清理登陆限制</span>
+              <pre>rm -f /www/server/panel/data/*.login</pre>
+              <span>查看面板授权IP</span>
+              <pre>cat /www/server/panel/data/limitip.conf</pre>
+              <span>关闭访问限制</span>
+              <pre>rm -f /www/server/panel/data/limitip.conf</pre>
+              <span>查看许可域名</span>
+              <pre>cat /www/server/panel/data/domain.conf</pre>
+              <span>关闭面板SSL</span>
+              <pre>
+rm -f /www/server/panel/data/ssl.pl &amp;&amp; /etc/init.d/bt restart</pre
+              >
+              <span>查看面板错误日志</span>
+              <pre>cat /tmp/panelBoot</pre>
+              <span>查看数据库错误日志</span>
+              <pre>cat /www/server/data/*.err</pre>
+              <span>站点配置文件目录(nginx)</span>
+              <pre>/www/server/panel/vhost/nginx</pre>
+              <span>站点配置文件目录(apache)</span>
+              <pre>/www/server/panel/vhost/apache</pre>
+              <span>站点默认目录</span>
+              <pre>/www/wwwroot</pre>
+              <span>数据库备份目录</span>
+              <pre>/www/backup/database</pre>
+              <span>站点备份目录</span>
+              <pre>/www/backup/site</pre>
+              <span>站点日志</span>
+              <pre>/www/wwwlogs</pre>
+            </div>
+            <a name="nginx" href="/btcode/#nginx">
+              <h2 class="th2">Nginx服务管理</h2>
+            </a>
+            <div class="btcode">
+              <span>nginx安装目录</span>
+              <pre>/www/server/nginx</pre>
+              <span>启动</span>
+              <pre>/etc/init.d/nginx start</pre>
+              <span>停止</span>
+              <pre>/etc/init.d/nginx stop</pre>
+              <span>重启</span>
+              <pre>/etc/init.d/nginx restart</pre>
+              <span>启载</span>
+              <pre>/etc/init.d/nginx reload</pre>
+              <span>nginx配置文件</span>
+              <pre>/www/server/nginx/conf/nginx.conf</pre>
+            </div>
+            <a name="apache" href="/btcode/#apache">
+              <h2 class="th2">Apache服务管理</h2>
+            </a>
+            <div class="btcode">
+              <span>apache安装目录</span>
+              <pre>/www/server/httpd</pre>
+              <span>启动</span>
+              <pre>/etc/init.d/httpd start</pre>
+              <span>停止</span>
+              <pre>/etc/init.d/httpd stop</pre>
+              <span>重启</span>
+              <pre>/etc/init.d/httpd restart</pre>
+              <span>启载</span>
+              <pre>/etc/init.d/httpd reload</pre>
+              <span>apache配置文件</span>
+              <pre>/www/server/apache/conf/httpd.conf</pre>
+            </div>
+            <a name="mysql" href="/btcode/#mysql">
+              <h2 class="th2">MySQL服务管理</h2>
+            </a>
+            <div class="btcode">
+              <span>mysql安装目录</span>
+              <pre>/www/server/mysql</pre>
+              <span>phpmyadmin安装目录</span>
+              <pre>/www/server/phpmyadmin</pre>
+              <span>数据存储目录</span>
+              <pre>/www/server/data</pre>
+              <span>启动</span>
+              <pre>/etc/init.d/mysqld start</pre>
+              <span>停止</span>
+              <pre>/etc/init.d/mysqld stop</pre>
+              <span>重启</span>
+              <pre>/etc/init.d/mysqld restart</pre>
+              <span>启载</span>
+              <pre>/etc/init.d/mysqld reload</pre>
+              <span>mysql配置文件</span>
+              <pre>/etc/my.cnf</pre>
+            </div>
+            <a name="ftp" href="/btcode/#ftp">
+              <h2 class="th2">FTP服务管理</h2>
+            </a>
+            <div class="btcode">
+              <span>ftp安装目录</span>
+              <pre>/www/server/pure-ftpd</pre>
+              <span>启动</span>
+              <pre>/etc/init.d/pure-ftpd start</pre>
+              <span>停止</span>
+              <pre>/etc/init.d/pure-ftpd stop</pre>
+              <span>重启</span>
+              <pre>/etc/init.d/pure-ftpd restart</pre>
+              <span>ftp配置文件</span>
+              <pre>/www/server/pure-ftpd/etc/pure-ftpd.conf</pre>
+            </div>
+            <a name="php" href="/btcode/#php">
+              <h2 class="th2">PHP服务管理</h2>
+            </a>
+            <div class="btcode">
+              <span>php安装目录</span>
+              <pre>/www/server/php</pre>
+              <span>启动</span
+              ><span class="info"
+                >(请根据安装PHP版本号做更改，例如：/etc/init.d/php-fpm-54
+                start)</span
+              >
+              <pre>
+/etc/init.d/php-fpm-{52|53|54|55|56|70|71|72|73|74} start</pre
+              >
+              <span>停止</span
+              ><span class="info"
+                >(请根据安装PHP版本号做更改，例如：/etc/init.d/php-fpm-54
+                stop)</span
+              >
+              <pre>
+/etc/init.d/php-fpm-{52|53|54|55|56|70|71|72|73|74} stop</pre
+              >
+              <span>重启</span
+              ><span class="info"
+                >(请根据安装PHP版本号做更改，例如：/etc/init.d/php-fpm-54
+                restart)</span
+              >
+              <pre>
+/etc/init.d/php-fpm-{52|53|54|55|56|70|71|72|73|74} restart</pre
+              >
+              <span>启载</span
+              ><span class="info"
+                >(请根据安装PHP版本号做更改，例如：/etc/init.d/php-fpm-54
+                reload)</span
+              >
+              <pre>
+/etc/init.d/php-fpm-{52|53|54|55|56|70|71|72|73|74} reload</pre
+              >
+              <span>配置文件</span
+              ><span class="info"
+                >(请根据安装PHP版本号做更改，例如：/www/server/php/52/etc/php.ini)</span
+              >
+              <pre>
+/www/server/php/{52|53|54|55|56|70|71|72|73|74}/etc/php.ini</pre
+              >
+            </div>
+            <a name="redis" href="/btcode/#redis">
+              <h2 class="th2">Redis服务管理</h2>
+            </a>
+            <div class="btcode">
+              <span>redis安装目录</span>
+              <pre>/www/server/redis</pre>
+              <span>启动</span>
+              <pre>/etc/init.d/redis start</pre>
+              <span>停止</span>
+              <pre>/etc/init.d/redis stop</pre>
+              <span>redis配置文件</span>
+              <pre>/www/server/redis/redis.conf</pre>
+            </div>
+            <a name="memcached" href="/btcode/#memcached">
+              <h2 class="th2">Memcached服务管理</h2>
+            </a>
+            <div class="btcode">
+              <span>memcached安装目录</span>
+              <pre>/usr/local/memcached</pre>
+              <span>启动</span>
+              <pre>/etc/init.d/memcached start</pre>
+              <span>停止</span>
+              <pre>/etc/init.d/memcached stop</pre>
+              <span>重启</span>
+              <pre>/etc/init.d/memcached restart</pre>
+              <span>启载</span>
+              <pre>/etc/init.d/memcached reload</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="foot">
+      <div class="wrap">
+        <div class="fb textcenter">
+          <div class="fb1 textcenter">
+            <a
+              href="http://www.bt.cn/new/agreement_open.html"
+              target="_blank"
+              rel="noreferrer"
+              >《开源许可协议》</a
+            >
+            <i>丨</i>
+            <a
+              href="http://www.bt.cn/new/agreement_user.html"
+              target="_blank"
+              rel="noreferrer"
+              >《用户协议》</a
+            >
+            <i>丨</i>
+            <a
+              href="http://www.bt.cn/new/agreement_privacy.html"
+              target="_blank"
+              rel="noreferrer"
+              >《隐私声明》</a
+            >
+          </div>
+          <div class="fb2 mt_15">
+            <p>Copyright © {:date('Y')} 宝塔面板安装脚本</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="{$cdnpublic}jquery/3.6.0/jquery.min.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    <script
+      src="{$cdnpublic}layer/3.5.1/layer.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="{$cdnpublic}clipboard.js/1.7.1/clipboard.min.js"
+    ></script>
+    <script type="text/javascript" src="/static/js/dx.js"></script>
+    <script>
+      $(function () {
+        var userId = "";
+
+        // 复制安装命令
+        var clipboard = new Clipboard(".ico-copy", {
+          text: function (element) {
+            return $(element).prev().text();
+          },
+        });
+        clipboard
+          .on("success", function (e) {
+            layer.msg(e.trigger.title + "成功", { icon: 1 });
+          })
+          .on("error", function (e) {
+            layer.msg("复制失败，请手动选中文本Ctrl+c复制内容", { icon: 2 });
+          });
+
+        $(".install-code .command").click(function () {
+          $(this).next(".ico-copy").click();
+        });
+
+        $("#goInstallLinux").click(function () {
+          scrollTop("#instal-linux");
+        });
+
+        $("#goInstallWindows").click(function () {
+          scrollTop("#instal-windows");
+        });
+
+        $("#goInstallCloud").click(function () {
+          scrollTop("#instal-cloud");
+        });
+
+        $("#goInstallMonitor").click(function () {
+          scrollTop("#instal-monitor");
+        });
+
+        function GetRequest() {
+          var url = location.search;
+          //获取url中"?"符后的字串
+          var theRequest = new Object();
+          if (url.indexOf("?") != -1) {
+            var str = url.substr(1);
+          }
+          return str;
+        }
+        if (GetRequest() == "bt") {
+          scrollTop("#instal-linux");
+        }
+
+        // 滚动到指定位置
+        function scrollTop(el) {
+          var headHeight = 0;
+          $("html, body").animate(
+            { scrollTop: $(el).offset().top - headHeight },
+            { duration: 200, easing: "swing" }
+          );
+        }
+      });
+    </script>
+  </body>
+</html>

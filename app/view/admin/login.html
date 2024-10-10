@@ -80,7 +80,7 @@ function submitlogin(){
         layer.close(ii);
         if(data.code == 0){
           layer.msg('登录成功，正在跳转', {icon: 1,shade: 0.01,time: 15000});
-          window.location.href='/admin';
+          window.location.href='/{:config_get('backaddress')}';
         }else{
           if(data.msg.indexOf('验证码')==-1){
             $("#verifycode").attr('src', '/admin/verifycode?r='+Math.random())

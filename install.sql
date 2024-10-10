@@ -12,6 +12,7 @@ INSERT INTO `cloud_config` (`key`, `value`) VALUES
 ('bt_key', ''),
 ('whitelist', '0'),
 ('download_page', '1'),
+('btcode_page', '1'),
 ('new_version', '9.2.0'),
 ('update_msg', '暂无更新日志'),
 ('update_date', '2024-09-13'),

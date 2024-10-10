@@ -8,7 +8,7 @@
 	<div class="col-xs-12 col-md-10 center-block" style="float: none;">
 
 <ul class="nav nav-tabs">
-	<li class="{if $type=='black'}active{/if}"><a href="/admin/list">黑名单列表</a></li><li class="{if $type=='white'}active{/if}"><a href="/admin/list/type/white">白名单列表</a></li>
+	<li class="{if $type=='black'}active{/if}"><a href="/{:config_get('backaddress')}/list">黑名单列表</a></li><li class="{if $type=='white'}active{/if}"><a href="/{:config_get('backaddress')}/list/type/white">白名单列表</a></li>
 </ul>
 
 {if $type=='black' && config_get('whitelist')=='1'}

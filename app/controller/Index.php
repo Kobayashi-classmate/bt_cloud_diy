@@ -20,5 +20,14 @@ class Index extends BaseController
         return view();
     }
 
+    public function btcode()
+    {
+        if(config_get('btcode_page') == '0' && !request()->islogin){
+            return 'need login';
+        }
+        View::assign('siteurl', request()->root(true));
+        return view();
+    }
+
     
 }
