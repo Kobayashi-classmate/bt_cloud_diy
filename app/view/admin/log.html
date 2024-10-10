@@ -36,7 +36,7 @@ $(document).ready(function(){
 	const pageSize = typeof window.$_GET['pageSize'] != 'undefined' ? parseInt(window.$_GET['pageSize']) : defaultPageSize;
 
 	$("#listTable").bootstrapTable({
-		url: '/admin/log_data',
+		url: '/{:config_get('backaddress')}/log_data',
 		pageNumber: pageNumber,
 		pageSize: pageSize,
 		classes: 'table table-striped table-hover table-bottom-border',

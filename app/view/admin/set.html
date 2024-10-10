@@ -764,7 +764,7 @@ name="main"}
             var ii = layer.load(2, { shade: [0.1, "#fff"] });
             $.ajax({
               type: "POST",
-              url: "/admin/testbturl",
+              url: "/{:config_get('backaddress')}/testbturl",
               data: postdata,
               dataType: "json",
               success: function (data) {
@@ -824,7 +824,7 @@ name="main"}
             var ii = layer.load(2, { shade: [0.1, "#fff"] });
             $.ajax({
               type: "POST",
-              url: "/admin/testbturl",
+              url: "/{:config_get('backaddress')}/testbturl",
               data: postdata,
               dataType: "json",
               success: function (data) {
@@ -846,7 +846,7 @@ name="main"}
           var ii = layer.load(2, { shade: [0.1, "#fff"] });
           $.ajax({
             type: "POST",
-            url: "/admin/set",
+            url: "/{:config_get('backaddress')}/set",
             data: $(obj).serialize(),
             dataType: "json",
             success: function (data) {
@@ -877,7 +877,7 @@ name="main"}
           var ii = layer.load(2, { shade: [0.1, "#fff"] });
           $.ajax({
             type: "POST",
-            url: "/admin/setaccount",
+            url: "/{:config_get('backaddress')}/setaccount",
             data: $(obj).serialize(),
             dataType: "json",
             success: function (data) {
@@ -908,7 +908,7 @@ name="main"}
           var ii = layer.load(2, { shade: [0.1, "#fff"] });
           $.ajax({
             type: "GET",
-            url: "/admin/cleancache",
+            url: "/{:config_get('backaddress')}/cleancache",
             dataType: "json",
             success: function (data) {
               layer.close(ii);
@@ -932,7 +932,7 @@ name="main"}
             var ii = layer.load(2, { shade: [0.1, "#fff"] });
             $.ajax({
               type: "POST",
-              url: "/admin/decrypt_version",
+              url: "/{:config_get('backaddress')}/decrypt_version",
               data: postdata,
               dataType: "json",
               success: function (data) {

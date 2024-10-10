@@ -131,11 +131,15 @@ Route::group('api', function () {
     Route::miss('api/return_error');
 });
 
-Route::get('/admin/verifycode', 'admin/verifycode')->middleware(\think\middleware\SessionInit::class);
-Route::any('/admin/login', 'admin/login')->middleware(\think\middleware\SessionInit::class);
-Route::get('/admin/logout', 'admin/logout');
+// Route::get(config_get("backaddress") + '/verifycode', 'admin/verifycode')->middleware(\think\middleware\SessionInit::class);
+// Route::any(config_get("backaddress") + '/login', 'admin/login')->middleware(\think\middleware\SessionInit::class);
 
-Route::group('admin', function () {
+Route::group(config_get("backaddress"), function () {
+    Route::get('/verifycode', 'admin/verifycode');
+    Route::any('/login', 'admin/login');
+})->middleware(\think\middleware\SessionInit::class);
+
+Route::group(config_get("backaddress"), function () {
     Route::get('/', 'admin/index');
     Route::any('/set', 'admin/set');
     Route::post('/decrypt_version', 'admin/btwaf_decrypt_version');
@@ -157,7 +161,7 @@ Route::group('admin', function () {
     Route::get('/refresh_deplist', 'admin/refresh_deplist');
     Route::get('/cleancache', 'admin/cleancache');
     Route::any('/ssl', 'admin/ssl');
-
+    Route::get('/logout', 'admin/logout');
 })->middleware(\app\middleware\CheckAdmin::class);
 
 Route::any('/installapp', 'install/index');

@@ -55,7 +55,7 @@ function makeSSL(obj){
     var ii = layer.load(2, {shade:[0.1,'#fff']});
 	$.ajax({
 		type : 'POST',
-		url : '/admin/ssl',
+		url : '/{:config_get('backaddress')}/ssl',
 		data : $(obj).serialize(),
 		dataType : 'json',
 		success : function(data) {

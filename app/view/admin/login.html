@@ -52,7 +52,7 @@
 				<span class="input-group-addon"><span class="glyphicon glyphicon-adjust"></span></span>
 				<input type="text" class="form-control input-lg" name="code" placeholder="输入验证码" autocomplete="off" required>
 				<span class="input-group-addon" style="padding: 0">
-					<img src="/admin/verifycode" height="45" id="verifycode" onclick="this.src='/admin/verifycode?r='+Math.random();" title="点击更换验证码">
+					<img src="/{:config_get('backaddress')}/verifycode" height="45" id="verifycode" onclick="this.src='/{:config_get('backaddress')}/verifycode?r='+Math.random();" title="点击更换验证码">
 				</span>
 			</div><br/>
             <div class="form-group">
@@ -83,7 +83,7 @@ function submitlogin(){
           window.location.href='/{:config_get('backaddress')}';
         }else{
           if(data.msg.indexOf('验证码')==-1){
-            $("#verifycode").attr('src', '/admin/verifycode?r='+Math.random())
+            $("#verifycode").attr('src', '/{:config_get('backaddress')}/verifycode?r='+Math.random())
           }
           layer.alert(data.msg, {icon: 2});
         }

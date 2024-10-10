@@ -26,7 +26,7 @@ function refresh_deplist(os){
         var ii = layer.msg('正在获取一键部署列表，请稍候...', {icon: 16, shade:0.1, time: 0});
         $.ajax({
             type : 'GET',
-            url : '/admin/refresh_deplist?os='+os,
+            url : '/{:config_get('backaddress')}/refresh_deplist?os='+os,
             dataType : 'json',
             success : function(data) {
                 layer.close(ii)

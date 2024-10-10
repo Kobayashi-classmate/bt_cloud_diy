@@ -8,6 +8,7 @@ CREATE TABLE `cloud_config` (
 INSERT INTO `cloud_config` (`key`, `value`) VALUES
 ('admin_username', 'admin'),
 ('admin_password', '123456'),
+('backaddress', 'admin'),
 ('bt_url', ''),
 ('bt_key', ''),
 ('whitelist', '0'),
@@ -23,9 +24,9 @@ INSERT INTO `cloud_config` (`key`, `value`) VALUES
 ('update_msg_btm', '暂无更新日志'),
 ('update_date_btm', '2024-04-24'),
 ('updateall_type', '0'),
-('syskey', 'UqP94LtI8eWAIgCP');
-('waf_version', '4.8');
-('waf_description', '暂无更新日志');
+('syskey', ''),
+('waf_version', '4.8'),
+('waf_description', '暂无更新日志'),
 ('waf_create_time', '2024-08-16 14:21:26');
 
 

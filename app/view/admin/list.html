@@ -50,7 +50,7 @@
 function setEnable(id,enable) {
 	$.ajax({
 		type : 'POST',
-		url : '/admin/list_op/type/{$type}',
+		url : '/{:config_get('backaddress')}/list_op/type/{$type}',
 		data: { act:'enable', id:id, enable:enable},
 		dataType : 'json',
 		success : function(data) {
@@ -75,7 +75,7 @@ function add_item(){
 			var ip = $("input[name='item_input']").val();
 			$.ajax({
 				type : 'POST',
-				url : '/admin/list_op/type/{$type}',
+				url : '/{:config_get('backaddress')}/list_op/type/{$type}',
 				data: { act:'add', ip:ip},
 				dataType : 'json',
 				success : function(data) {
@@ -98,7 +98,7 @@ function add_item(){
 function edit_item(id){
 	$.ajax({
 		type : 'POST',
-		url : '/admin/list_op/type/{$type}',
+		url : '/{:config_get('backaddress')}/list_op/type/{$type}',
 		data: { act:'get', id:id},
 		dataType : 'json',
 		success : function(data) {
@@ -111,7 +111,7 @@ function edit_item(id){
 						var ip = $("input[name='item_input']").val();
 						$.ajax({
 							type : 'POST',
-							url : '/admin/list_op/type/{$type}',
+							url : '/{:config_get('backaddress')}/list_op/type/{$type}',
 							data: { act:'edit', id:id, ip:ip},
 							dataType : 'json',
 							success : function(data) {
@@ -143,7 +143,7 @@ function del_item(id) {
 	if(confirm('是否确定删除此记录？')){
 		$.ajax({
 			type : 'POST',
-			url : '/admin/list_op/type/{$type}',
+			url : '/{:config_get('backaddress')}/list_op/type/{$type}',
 			data: { act:'del', id:id},
 			dataType : 'json',
 			success : function(data) {
@@ -168,7 +168,7 @@ $(document).ready(function(){
 	const pageSize = typeof window.$_GET['pageSize'] != 'undefined' ? parseInt(window.$_GET['pageSize']) : defaultPageSize;
 
 	$("#listTable").bootstrapTable({
-		url: '/admin/list_data/type/{$type}',
+		url: '/{:config_get('backaddress')}/list_data/type/{$type}',
 		pageNumber: pageNumber,
 		pageSize: pageSize,
 		classes: 'table table-striped table-hover table-bottom-border',
