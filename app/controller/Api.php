@@ -262,7 +262,7 @@ class Api extends BaseController
                 'create_time' => 1705315163,
             ];
         } else {
-            $create_time = config_get('waf_update_date');
+            $create_time = config_get('waf_update_datetime');
             $data = [
                 'version' => config_get('waf_new_version'),
                 'description' => config_get('waf_update_msg'),

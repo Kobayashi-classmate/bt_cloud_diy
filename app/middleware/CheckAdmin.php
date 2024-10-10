@@ -12,7 +12,7 @@ class CheckAdmin
             if ($request->isAjax() || !$request->isGet()) {
                 return json(['code'=>-1, 'msg'=>'未登录'])->code(401);
             }
-            return redirect((string)url('/admin/login'));
+            return response('404 Not Found')->code(404);
         }
         return $next($request);
     }

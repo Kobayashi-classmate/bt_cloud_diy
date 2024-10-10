@@ -50,7 +50,7 @@ class Admin extends BaseController
     public function logout()
     {
         cookie('admin_token', null);
-        return redirect('/admin/login');
+        return redirect(config_get('backaddress') . '/login');
     }
 
     public function index()
@@ -441,7 +441,7 @@ class Admin extends BaseController
         $decryptData = json_decode(hex2bin($encryptiondata));
         config_set('waf_new_version', $decryptData->version);
         config_set('waf_update_msg', $decryptData->description);
-        config_set('waf_update_date', date('Y-m-d H:i:s', $decryptData->create_time));
+        config_set('waf_update_datetime', date('Y-m-d H:i:s', $decryptData->create_time));
         Cache::clear();
         return json(['msg' => '数据更新成功', 'data' => $decryptData, 'status' => true, 'code' => 0]);
     }
