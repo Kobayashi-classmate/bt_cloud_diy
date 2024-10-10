@@ -25,9 +25,9 @@ INSERT INTO `cloud_config` (`key`, `value`) VALUES
 ('update_date_btm', '2024-04-24'),
 ('updateall_type', '0'),
 ('syskey', ''),
-('waf_version', '4.8'),
-('waf_description', '暂无更新日志'),
-('waf_create_time', '2024-08-16 14:21:26');
+('waf_new_version', '4.8'),
+('waf_update_msg', '暂无更新日志'),
+('waf_update_date', '2024-08-16 14:21:26');
 
 
 DROP TABLE IF EXISTS `cloud_black`;
