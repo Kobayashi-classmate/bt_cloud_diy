@@ -23,7 +23,7 @@ class Admin extends BaseController
             return response('404 Not Found')->code(404);
         }
         $access_key = input('param.access_key', null, 'trim');
-        if (config_get('login_key') == 1 && $access_key != config_get('access_key')) {            
+        if (config_get('login_key') == 1 && $access_key != config_get('access_key')) {
             return response('404 Not Found')->code(404);
         }
         if (request()->isAjax()) {
@@ -56,7 +56,10 @@ class Admin extends BaseController
     public function logout()
     {
         cookie('admin_token', null);
-        return redirect(config_get('backaddress') . '/login');
+        if (config_get('login_key') == 1) {
+            return redirect('../' . config_get('backaddress') . '/login?access_key=' . config_get('access_key'));
+        }
+        return redirect('../' . config_get('backaddress') . '/login');
     }
 
     public function index()
