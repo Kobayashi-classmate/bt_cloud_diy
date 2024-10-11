@@ -3,76 +3,6 @@ name="main"}
 <div class="container" style="padding-top: 70px">
   {if $mod=='sys'}
   <div class="col-sm-12 col-md-6 center-block">
-    <div class="panel panel-success">
-      <div class="panel-heading">
-        <h3 class="panel-title">系统基本设置</h3>
-      </div>
-      <div class="panel-body">
-        <form
-          onsubmit="return saveSetting(this)"
-          method="post"
-          class="form"
-          role="form"
-        >
-          <div class="form-group">
-            <label>是否开启白名单模式：</label><br />
-            <select
-              class="form-control"
-              name="whitelist"
-              default="{:config_get('whitelist')}"
-            >
-              <option value="0">关闭</option>
-              <option value="1">开启</option>
-            </select>
-            <font color="green"
-              >开启白名单模式后，只有在<a
-                href="/{:config_get('backaddress')}/list/type/white"
-                target="_blank"
-                >白名单列表</a
-              >中的服务器IP才能使用此云端</font
-            >
-          </div>
-          <div class="form-group">
-            <label>安装脚本展示页面开关：</label>
-            <select
-              class="form-control"
-              name="download_page"
-              default="{:config_get('download_page')}"
-            >
-              <option value="0">关闭</option>
-              <option value="1">开启</option>
-            </select>
-            <font color="green"
-              >页面地址：<a href="/download" target="_blank">/download</a
-              >，开启后可以公开访问，否则只能管理员访问
-            </font>
-          </div>
-          <div class="form-group">
-            <label>宝塔命令展示页面开关：</label>
-            <select
-              class="form-control"
-              name="btcode_page"
-              default="{:config_get('btcode_page')}"
-            >
-              <option value="0">关闭</option>
-              <option value="1">开启</option>
-            </select>
-            <font color="green"
-              >页面地址：<a href="/btcode" target="_blank">/btcode</a
-              >，开启后可以公开访问，否则只能管理员访问
-            </font>
-          </div>
-          <div class="form-group text-center">
-            <input
-              type="submit"
-              name="submit"
-              value="保存"
-              class="btn btn-success btn-block"
-            />
-          </div>
-        </form>
-      </div>
-    </div>
     <div class="panel panel-info">
       <div class="panel-heading">
         <h3 class="panel-title">Linux面板版本设置</h3>
@@ -142,19 +72,21 @@ name="main"}
         >
           <div class="form-group">
             <label>版本信息解析：</label>
-            <input
-              type="text"
-              name="waf_encryptiondata"
-              class="form-control"
-            />
-            <font color="green">将从官方接口获取的信息："data":"此处双引号内的内容复制粘贴至文本框内"</font>
-			<div class="form-group text-center">
-			  <button type="button" class="btn btn-info btn-block" id="decryptmsg">
-				解析内容
-			  </button>
-			</div>
-		  </div>
-		  <div class="form-group">
+            <input type="text" name="waf_encryptiondata" class="form-control" />
+            <font color="green"
+              >将从官方接口获取的信息："data":"此处双引号内的内容复制粘贴至文本框内"</font
+            >
+            <div class="form-group text-center">
+              <button
+                type="button"
+                class="btn btn-info btn-block"
+                id="decryptmsg"
+              >
+                解析内容
+              </button>
+            </div>
+          </div>
+          <div class="form-group">
             <label>云WAF最新版本号：</label>
             <input
               type="text"
@@ -184,7 +116,9 @@ name="main"}
               value="{:config_get('waf_update_datetime')}"
               class="form-control"
             />
-            <font color="green">用于检测更新接口返回，修改时需符合当前数据格式（请勿随意更改此处格式，以免无法正常获取更新信息）</font>
+            <font color="green"
+              >用于检测更新接口返回，修改时需符合当前数据格式（请勿随意更改此处格式，以免无法正常获取更新信息）</font
+            >
           </div>
           <div class="form-group text-center">
             <input
@@ -713,64 +647,331 @@ name="main"}
           </form>
         </div>
       </div>
-      {/if}
-      <script src="{$cdnpublic}layer/3.5.1/layer.js"></script>
-      <script>
-        $(document).ready(function () {
-          var items = $("select[default]");
-          for (i = 0; i < items.length; i++) {
-            $(items[i]).val($(items[i]).attr("default") || 0);
+      {elseif $mod=='backmange'}
+      <div class="col-xs-12 col-sm-8 col-lg-6 center-block" style="float: none">
+        <div class="panel panel-success">
+          <div class="panel-heading">
+            <h3 class="panel-title">系统基本设置</h3>
+          </div>
+          <div class="panel-body">
+            <form
+              onsubmit="return saveSetting(this)"
+              method="post"
+              class="form"
+              role="form"
+            >
+              <div class="form-group">
+                <label>是否开启白名单模式：</label><br />
+                <select
+                  class="form-control"
+                  name="whitelist"
+                  default="{:config_get('whitelist')}"
+                >
+                  <option value="0">关闭</option>
+                  <option value="1">开启</option>
+                </select>
+                <font color="green"
+                  >开启白名单模式后，只有在<a
+                    href="/{:config_get('backaddress')}/list/type/white"
+                    target="_blank"
+                    >白名单列表</a
+                  >中的服务器IP才能使用此云端</font
+                >
+              </div>
+              <div class="form-group">
+                <label>安装脚本展示页面开关：</label>
+                <select
+                  class="form-control"
+                  name="download_page"
+                  default="{:config_get('download_page')}"
+                >
+                  <option value="0">关闭</option>
+                  <option value="1">开启</option>
+                </select>
+                <font color="green"
+                  >页面地址：<a href="/download" target="_blank">/download</a
+                  >，开启后可以公开访问，否则只能管理员访问
+                </font>
+              </div>
+              <div class="form-group">
+                <label>宝塔命令展示页面开关：</label>
+                <select
+                  class="form-control"
+                  name="btcode_page"
+                  default="{:config_get('btcode_page')}"
+                >
+                  <option value="0">关闭</option>
+                  <option value="1">开启</option>
+                </select>
+                <font color="green"
+                  >页面地址：<a href="/btcode" target="_blank">/btcode</a
+                  >，开启后可以公开访问，否则只能管理员访问
+                </font>
+              </div>
+              <div class="form-group">
+                <label>后台访问地址：</label><br />
+                <input
+                  type="text"
+                  name="backaddress"
+                  value="{:config_get('backaddress')}"
+                  class="form-control"
+                  required
+                  onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9]/g,'')"
+                  onpaste="value=value.replace(/[^\a-\z\A-\Z0-9]/g,'')"
+                  oncontextmenu="value=value.replace(/[^\a-\z\A-\Z0-9]/g,'')"
+                />
+                <font color="green"
+                  >请牢记当前访问地址，如遗忘访问地址，需重新安装！</font
+                >
+              </div>
+              <div class="form-group">
+                <label>是否开启访问密钥：</label><br />
+                <select
+                  class="form-control"
+                  name="login_key"
+                  default="{:config_get('login_key')}"
+                >
+                  <option value="0">关闭</option>
+                  <option value="1">开启</option>
+                </select>
+              </div>
+              <div class="form-group text-center">
+                <input
+                  type="submit"
+                  name="submit"
+                  value="保存"
+                  class="btn btn-success btn-block"
+                />
+              </div>
+            </form>
+          </div>
+        </div>
+        {if config_get('login_key')==1}
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">登录密钥设置</h3>
+          </div>
+          <div class="panel-body">
+            <form
+              onsubmit="return saveSetting(this)"
+              method="post"
+              class="form"
+              role="form"
+            >
+              <font color="green"
+                >当前已开启登录密钥，请立即设置或修改密钥，以防退出后无法登录！</font
+              >
+              <div class="form-group">
+                <label>访问密钥：</label><br />
+                <input
+                  type="text"
+                  name="access_key"
+                  value="{:config_get('access_key')}"
+                  class="form-control"
+                  required
+                  onkeyup="value=value.replace(/[^\a-\z\A-\Z0-9]/g,'')"
+                  onpaste="value=value.replace(/[^\a-\z\A-\Z0-9]/g,'')"
+                  oncontextmenu="value=value.replace(/[^\a-\z\A-\Z0-9]/g,'')"
+                />
+                <font color="green"
+                  >当前登录地址：<br /><a
+                    href="/{:config_get('backaddress')}/login?access_key={:config_get('access_key')}"
+                    target="_blank"
+                    >/{:config_get('backaddress')}/login?access_key={:config_get('access_key')}</a
+                  ><br />请牢记上述地址，以防无法登录！</font
+                >
+              </div>
+              <div class="form-group text-center">
+                <input
+                  type="submit"
+                  name="submit"
+                  value="保存"
+                  class="btn btn-success btn-block"
+                />
+              </div>
+            </form>
+          </div>
+        </div>
+        {/if} {/if}
+        <script src="{$cdnpublic}layer/3.5.1/layer.js"></script>
+        <script>
+          $(document).ready(function () {
+            var items = $("select[default]");
+            for (i = 0; i < items.length; i++) {
+              $(items[i]).val($(items[i]).attr("default") || 0);
+            }
+            $("#testbturl").click(function () {
+              var bt_type = $("select[name=bt_type]").val();
+              if (bt_type == "1") {
+                var bt_surl = $("input[name=bt_surl]").val();
+                if (bt_surl == "") {
+                  layer.alert("第三方云端URL不能为空");
+                  return;
+                }
+                if (
+                  bt_surl.indexOf("http://") == -1 &&
+                  bt_surl.indexOf("https://") == -1
+                ) {
+                  layer.alert("第三方云端URL不正确");
+                  return;
+                }
+                var postdata = { bt_type: bt_type, bt_surl: bt_surl };
+              } else {
+                var bt_url = $("input[name=bt_url]").val();
+                var bt_key = $("input[name=bt_key]").val();
+                if (bt_url == "") {
+                  layer.alert("宝塔面板URL不能为空");
+                  return;
+                }
+                if (
+                  bt_url.indexOf("http://") == -1 &&
+                  bt_url.indexOf("https://") == -1
+                ) {
+                  layer.alert("宝塔面板URL不正确");
+                  return;
+                }
+                if (bt_key == "") {
+                  layer.alert("宝塔面板接口密钥不能为空");
+                  return;
+                }
+                var postdata = {
+                  bt_type: bt_type,
+                  bt_url: bt_url,
+                  bt_key: bt_key,
+                };
+              }
+              var ii = layer.load(2, { shade: [0.1, "#fff"] });
+              $.ajax({
+                type: "POST",
+                url: "/{:config_get('backaddress')}/testbturl",
+                data: postdata,
+                dataType: "json",
+                success: function (data) {
+                  layer.close(ii);
+                  if (data.code == 0) {
+                    layer.msg(data.msg, { icon: 1, time: 1000 });
+                  } else {
+                    layer.alert(data.msg, { icon: 2 });
+                  }
+                },
+                error: function (data) {
+                  layer.close(ii);
+                  layer.msg("服务器错误");
+                },
+              });
+            });
+            $("#testbturl2").click(function () {
+              var wbt_type = $("select[name=wbt_type]").val();
+              if (wbt_type == "1") {
+                var wbt_surl = $("input[name=wbt_surl]").val();
+                if (wbt_surl == "") {
+                  layer.alert("第三方云端URL不能为空");
+                  return;
+                }
+                if (
+                  wbt_surl.indexOf("http://") == -1 &&
+                  wbt_surl.indexOf("https://") == -1
+                ) {
+                  layer.alert("第三方云端URL不正确");
+                  return;
+                }
+                var postdata = { bt_type: wbt_type, bt_surl: wbt_surl };
+              } else {
+                var wbt_url = $("input[name=wbt_url]").val();
+                var wbt_key = $("input[name=wbt_key]").val();
+                if (wbt_url == "") {
+                  layer.alert("宝塔面板URL不能为空");
+                  return;
+                }
+                if (
+                  wbt_url.indexOf("http://") == -1 &&
+                  wbt_url.indexOf("https://") == -1
+                ) {
+                  layer.alert("宝塔面板URL不正确");
+                  return;
+                }
+                if (wbt_key == "") {
+                  layer.alert("宝塔面板接口密钥不能为空");
+                  return;
+                }
+                var postdata = {
+                  bt_type: wbt_type,
+                  bt_url: wbt_url,
+                  bt_key: wbt_key,
+                };
+              }
+              var ii = layer.load(2, { shade: [0.1, "#fff"] });
+              $.ajax({
+                type: "POST",
+                url: "/{:config_get('backaddress')}/testbturl",
+                data: postdata,
+                dataType: "json",
+                success: function (data) {
+                  layer.close(ii);
+                  if (data.code == 0) {
+                    layer.msg(data.msg, { icon: 1, time: 1000 });
+                  } else {
+                    layer.alert(data.msg, { icon: 2 });
+                  }
+                },
+                error: function (data) {
+                  layer.close(ii);
+                  layer.msg("服务器错误");
+                },
+              });
+            });
+          });
+          function saveSetting(obj) {
+            var ii = layer.load(2, { shade: [0.1, "#fff"] });
+            $.ajax({
+              type: "POST",
+              url: "/{:config_get('backaddress')}/set",
+              data: $(obj).serialize(),
+              dataType: "json",
+              success: function (data) {
+                layer.close(ii);
+                if (data.code == 0) {
+                  layer.alert(
+                    "设置保存成功！",
+                    {
+                      icon: 1,
+                      closeBtn: false,
+                    },
+                    function () {
+                      window.location.reload();
+                    }
+                  );
+                } else {
+                  layer.alert(data.msg, { icon: 2 });
+                }
+              },
+              error: function (data) {
+                layer.close(ii);
+                layer.msg("服务器错误");
+              },
+            });
+            return false;
           }
-          $("#testbturl").click(function () {
-            var bt_type = $("select[name=bt_type]").val();
-            if (bt_type == "1") {
-              var bt_surl = $("input[name=bt_surl]").val();
-              if (bt_surl == "") {
-                layer.alert("第三方云端URL不能为空");
-                return;
-              }
-              if (
-                bt_surl.indexOf("http://") == -1 &&
-                bt_surl.indexOf("https://") == -1
-              ) {
-                layer.alert("第三方云端URL不正确");
-                return;
-              }
-              var postdata = { bt_type: bt_type, bt_surl: bt_surl };
-            } else {
-              var bt_url = $("input[name=bt_url]").val();
-              var bt_key = $("input[name=bt_key]").val();
-              if (bt_url == "") {
-                layer.alert("宝塔面板URL不能为空");
-                return;
-              }
-              if (
-                bt_url.indexOf("http://") == -1 &&
-                bt_url.indexOf("https://") == -1
-              ) {
-                layer.alert("宝塔面板URL不正确");
-                return;
-              }
-              if (bt_key == "") {
-                layer.alert("宝塔面板接口密钥不能为空");
-                return;
-              }
-              var postdata = {
-                bt_type: bt_type,
-                bt_url: bt_url,
-                bt_key: bt_key,
-              };
-            }
+          function saveAccount(obj) {
             var ii = layer.load(2, { shade: [0.1, "#fff"] });
             $.ajax({
               type: "POST",
-              url: "/{:config_get('backaddress')}/testbturl",
-              data: postdata,
+              url: "/{:config_get('backaddress')}/setaccount",
+              data: $(obj).serialize(),
               dataType: "json",
               success: function (data) {
                 layer.close(ii);
                 if (data.code == 0) {
-                  layer.msg(data.msg, { icon: 1, time: 1000 });
+                  layer.alert(
+                    "管理账号保存成功！请重新登录。",
+                    {
+                      icon: 1,
+                      closeBtn: false,
+                    },
+                    function () {
+                      window.location.reload();
+                    }
+                  );
                 } else {
                   layer.alert(data.msg, { icon: 2 });
                 }
@@ -780,154 +981,32 @@ name="main"}
                 layer.msg("服务器错误");
               },
             });
-          });
-          $("#testbturl2").click(function () {
-            var wbt_type = $("select[name=wbt_type]").val();
-            if (wbt_type == "1") {
-              var wbt_surl = $("input[name=wbt_surl]").val();
-              if (wbt_surl == "") {
-                layer.alert("第三方云端URL不能为空");
-                return;
-              }
-              if (
-                wbt_surl.indexOf("http://") == -1 &&
-                wbt_surl.indexOf("https://") == -1
-              ) {
-                layer.alert("第三方云端URL不正确");
-                return;
-              }
-              var postdata = { bt_type: wbt_type, bt_surl: wbt_surl };
-            } else {
-              var wbt_url = $("input[name=wbt_url]").val();
-              var wbt_key = $("input[name=wbt_key]").val();
-              if (wbt_url == "") {
-                layer.alert("宝塔面板URL不能为空");
-                return;
-              }
-              if (
-                wbt_url.indexOf("http://") == -1 &&
-                wbt_url.indexOf("https://") == -1
-              ) {
-                layer.alert("宝塔面板URL不正确");
-                return;
-              }
-              if (wbt_key == "") {
-                layer.alert("宝塔面板接口密钥不能为空");
-                return;
-              }
-              var postdata = {
-                bt_type: wbt_type,
-                bt_url: wbt_url,
-                bt_key: wbt_key,
-              };
-            }
+            return false;
+          }
+          function cleancache() {
             var ii = layer.load(2, { shade: [0.1, "#fff"] });
             $.ajax({
-              type: "POST",
-              url: "/{:config_get('backaddress')}/testbturl",
-              data: postdata,
+              type: "GET",
+              url: "/{:config_get('backaddress')}/cleancache",
               dataType: "json",
               success: function (data) {
                 layer.close(ii);
-                if (data.code == 0) {
-                  layer.msg(data.msg, { icon: 1, time: 1000 });
-                } else {
-                  layer.alert(data.msg, { icon: 2 });
-                }
+                layer.msg("清理缓存成功", { icon: 1 });
               },
               error: function (data) {
                 layer.close(ii);
                 layer.msg("服务器错误");
               },
             });
-          });
-        });
-        function saveSetting(obj) {
-          var ii = layer.load(2, { shade: [0.1, "#fff"] });
-          $.ajax({
-            type: "POST",
-            url: "/{:config_get('backaddress')}/set",
-            data: $(obj).serialize(),
-            dataType: "json",
-            success: function (data) {
-              layer.close(ii);
-              if (data.code == 0) {
-                layer.alert(
-                  "设置保存成功！",
-                  {
-                    icon: 1,
-                    closeBtn: false,
-                  },
-                  function () {
-                    window.location.reload();
-                  }
-                );
-              } else {
-                layer.alert(data.msg, { icon: 2 });
-              }
-            },
-            error: function (data) {
-              layer.close(ii);
-              layer.msg("服务器错误");
-            },
-          });
-          return false;
-        }
-        function saveAccount(obj) {
-          var ii = layer.load(2, { shade: [0.1, "#fff"] });
-          $.ajax({
-            type: "POST",
-            url: "/{:config_get('backaddress')}/setaccount",
-            data: $(obj).serialize(),
-            dataType: "json",
-            success: function (data) {
-              layer.close(ii);
-              if (data.code == 0) {
-                layer.alert(
-                  "管理账号保存成功！请重新登录。",
-                  {
-                    icon: 1,
-                    closeBtn: false,
-                  },
-                  function () {
-                    window.location.reload();
-                  }
-                );
-              } else {
-                layer.alert(data.msg, { icon: 2 });
-              }
-            },
-            error: function (data) {
-              layer.close(ii);
-              layer.msg("服务器错误");
-            },
-          });
-          return false;
-        }
-        function cleancache() {
-          var ii = layer.load(2, { shade: [0.1, "#fff"] });
-          $.ajax({
-            type: "GET",
-            url: "/{:config_get('backaddress')}/cleancache",
-            dataType: "json",
-            success: function (data) {
-              layer.close(ii);
-              layer.msg("清理缓存成功", { icon: 1 });
-            },
-            error: function (data) {
-              layer.close(ii);
-              layer.msg("服务器错误");
-            },
-          });
-        }		
-		$("#decryptmsg").click(function () {
+          }
+          $("#decryptmsg").click(function () {
             var encryptiondata = $("input[name=waf_encryptiondata]").val();
             if (encryptiondata == "") {
               layer.alert("需解析信息不能为空");
               return;
             }
             var postdata = {
-				encryptiondata: encryptiondata
+              encryptiondata: encryptiondata,
             };
             var ii = layer.load(2, { shade: [0.1, "#fff"] });
             $.ajax({
@@ -938,10 +1017,13 @@ name="main"}
               success: function (data) {
                 layer.close(ii);
                 if (data.code == 0) {
-                  layer.msg(data.msg, {icon: 1, closeBtn: false},
-                  function () {
-                    window.location.reload();
-                  });
+                  layer.msg(
+                    data.msg,
+                    { icon: 1, closeBtn: false },
+                    function () {
+                      window.location.reload();
+                    }
+                  );
                 } else {
                   layer.alert(data.msg, { icon: 2 });
                 }
@@ -952,8 +1034,9 @@ name="main"}
               },
             });
           });
-      </script>
-      {/block}
+        </script>
+        {/block}
+      </div>
     </div>
   </div>
 </div>

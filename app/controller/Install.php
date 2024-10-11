@@ -12,7 +12,7 @@ class Install extends BaseController
     public function index()
     {
         if (file_exists(app()->getRootPath() . '.env')) {
-            return '当前已经安装成功，如果需要重新安装，请手动删除根目录.env文件';
+            return response('404 Not Found')->code(404);
         }
         if (request()->isPost()) {
             $mysql_host = input('post.mysql_host', null, 'trim');

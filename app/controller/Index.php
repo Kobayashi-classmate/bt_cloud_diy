@@ -8,13 +8,13 @@ class Index extends BaseController
 {
     public function index()
     {
-        return '';
+        return response('404 Not Found')->code(404);
     }
 
     public function download()
     {
         if(config_get('download_page') == '0' && !request()->islogin){
-            return 'need login';
+            return response('404 Not Found')->code(404);
         }
         View::assign('siteurl', request()->root(true));
         return view();
@@ -23,7 +23,7 @@ class Index extends BaseController
     public function btcode()
     {
         if(config_get('btcode_page') == '0' && !request()->islogin){
-            return 'need login';
+            return response('404 Not Found')->code(404);
         }
         View::assign('siteurl', request()->root(true));
         return view();
