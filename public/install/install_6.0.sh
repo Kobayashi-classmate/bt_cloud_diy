@@ -38,6 +38,7 @@ Ready_Check(){
         echo -e "请尝试清理磁盘空间后再重新进行安装"
         exit 1
     fi
+
     ROOT_DISK_INODE=$(df -i|grep /$|awk '{print $2}')
 	if [ "${ROOT_DISK_INODE}" != "0" ];then
 		ROOT_DISK_INODE_FREE=$(df -i|grep /$|awk '{print $4}')
@@ -47,6 +48,7 @@ Ready_Check(){
 			exit 1
 		fi
 	fi
+
 	WWW_DISK_INODE==$(df -i|grep /www|awk '{print $2}')
 	if [ "${WWW_DISK_INODE}" ] && [ "${WWW_DISK_INODE}" != "0" ] ;then
 		WWW_DISK_INODE_FREE=$(df -i|grep /www|awk '{print $4}')
@@ -57,8 +59,6 @@ Ready_Check(){
 		fi
 	fi
 }
-
-
 
 
 Centos6Check=$(cat /etc/redhat-release | grep ' 6.' | grep -iE 'centos|Red Hat')
@@ -483,7 +483,7 @@ Install_RPM_Pack(){
 
 	sed -i 's/SELINUX=enforcing/SELINUX=disabled/' /etc/selinux/config
 	#yum remove -y python-requests python3-requests python-greenlet python3-greenlet
-	yumPacks="libcurl-devel wget tar gcc make zip unzip openssl openssl-devel gcc libxml2 libxml2-devel libxslt* zlib zlib-devel libjpeg-devel libpng-devel libwebp libwebp-devel freetype freetype-devel lsof pcre pcre-devel vixie-cron crontabs icu libicu-devel c-ares libffi-devel bzip2-devel ncurses-devel sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel qrencode"
+	yumPacks="libcurl-devel wget tar gcc make zip unzip openssl openssl-devel gcc libxml2 libxml2-devel libxslt* zlib zlib-devel libjpeg-devel libpng-devel libwebp libwebp-devel freetype freetype-devel lsof pcre pcre-devel vixie-cron crontabs icu libicu-devel c-ares libffi-devel bzip2-devel ncurses-devel sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel qrencode at mariadb rsyslog net-tools"
 	yum install -y ${yumPacks}
 
 	for yumPack in ${yumPacks}
@@ -537,7 +537,7 @@ Install_Deb_Pack(){
 		apt-get install curl -y
 	fi
 
-	debPacks="wget curl libcurl4-openssl-dev gcc make zip unzip tar openssl libssl-dev gcc libxml2 libxml2-dev zlib1g zlib1g-dev libjpeg-dev libpng-dev lsof libpcre3 libpcre3-dev cron net-tools swig build-essential libffi-dev libbz2-dev libncurses-dev libsqlite3-dev libreadline-dev tk-dev libgdbm-dev libdb-dev libdb++-dev libpcap-dev xz-utils git qrencode sqlite3";
+	debPacks="wget curl libcurl4-openssl-dev gcc make zip unzip tar openssl libssl-dev gcc libxml2 libxml2-dev zlib1g zlib1g-dev libjpeg-dev libpng-dev lsof libpcre3 libpcre3-dev cron net-tools swig build-essential libffi-dev libbz2-dev libncurses-dev libsqlite3-dev libreadline-dev tk-dev libgdbm-dev libdb-dev libdb++-dev libpcap-dev xz-utils git qrencode sqlite3 at mariadb-client rsyslog net-tools";
 	apt-get install -y $debPacks --force-yes
 
 	for debPack in ${debPacks}
@@ -1025,7 +1025,19 @@ Set_Bt_Panel(){
 		lsattr python3.7 python
 		Red_Error "ERROR: The BT-Panel service startup failed." "ERROR: 宝塔启动失败"
 	fi
-	sleep 15
+	
+	echo "========================================"
+    echo "正在等待dpkg frontend lock文件解锁"
+    echo "等待时间：30s"
+    echo "等待时间结束后，不论文件是否解锁，都将会尝试进行安装防火墙相关内容！"
+    echo "========================================"
+	sleep 30
+	echo "========================================"
+	echo "开始尝试安装防火墙相关内容..."
+	echo "E: Unable to acquire the dpkg frontend lock..."
+	echo "如下方出现上述相似报错内容，请再运行一遍本安装命令"
+    echo "========================================"
+
 	if [ "$PANEL_USER" ];then
 		cd ${setup_path}/server/panel/
 		btpython -c 'import tools;tools.set_panel_username("'$PANEL_USER'")'
