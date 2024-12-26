@@ -13,9 +13,9 @@ use yzh52521\Hashing\Hash;
 
 class Admin extends BaseController
 {
-    public function verifycode()
+    public function verifycode($id = '')
     {
-        return captcha();
+        return captcha($id);
     }
 
     public function login()
@@ -31,13 +31,13 @@ class Admin extends BaseController
 
             $username = input('post.username', null, 'trim');
             $password = input('post.password', null, 'trim');
-            $code = input('post.code', null, 'trim');
+            $captcha = input('post.captcha', null, 'trim');
 
             if (empty($username) || empty($password)) {
                 return json(['code' => -1, 'msg' => '用户名或密码不能为空']);
             }
-            if (!captcha_check($code)) {
-                return json(['code' => -1, 'msg' => '验证码错误']);
+            if (!captcha_check($captcha)) {
+                return json(['code' => -1, 'msg' => '验证码错误', 'captcha' => $captcha]);
             }
             if ($username == config_get('admin_username') && Hash::check($password, config_get('admin_password'))) {
                 Db::name('log')->insert(['uid' => 0, 'action' => '登录成功', 'data' => 'IP:' . $this->clientip, 'addtime' => date("Y-m-d H:i:s")]);
@@ -143,7 +143,11 @@ class Admin extends BaseController
             if ($params['newpwd'] != $params['newpwd2']) {
                 return json(['code' => -1, 'msg' => '两次新密码输入不一致']);
             }
-            config_set('admin_password', Hash::make($params['newpwd']));
+            config_set('admin_password', Hash::make($params['newpwd'], [
+                'memory' => 1024,
+                'time' => 4,
+                'threads' => 1,
+            ]));
         }
         cache('configs', NULL);
         cookie('admin_token', null);

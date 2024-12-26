@@ -51,13 +51,17 @@ class Install extends BaseController
             $DB->exec("set sql_mode = ''");
             $DB->exec("set names utf8");
 
-            $admin_password_hash = Hash::make($admin_password);
+            $pwdhashed = Hash::make($admin_password, [
+                'memory' => 1024,
+                'time' => 4,
+                'threads' => 1,
+            ]);
 
             $sqls = file_get_contents(app()->getRootPath() . 'install.sql');
             $sqls = explode(';', $sqls);
             $sqls[] = "REPLACE INTO `" . $mysql_prefix . "config` VALUES ('syskey', '" . random(16) . "')";
             $sqls[] = "REPLACE INTO `" . $mysql_prefix . "config` VALUES ('admin_username', '" . addslashes($admin_username) . "')";
-            $sqls[] = "REPLACE INTO `" . $mysql_prefix . "config` VALUES ('admin_password', '" . addslashes($admin_password_hash) . "')";
+            $sqls[] = "REPLACE INTO `" . $mysql_prefix . "config` VALUES ('admin_password', '" . addslashes($pwdhashed) . "')";
             $sqls[] = "REPLACE INTO `" . $mysql_prefix . "config` VALUES ('backaddress', '" . addslashes($backaddress) . "')";
             $success = 0;
             $error = 0;

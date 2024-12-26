@@ -74,7 +74,7 @@ function submitlogin(){
     $.ajax({
       type : 'POST',
       url : '{:request()->url()}',
-      data: {username:user, password:pass, code:code},
+      data: {username:user, password:pass, captcha:code},
       dataType : 'json',
       success : function(data) {
         layer.close(ii);

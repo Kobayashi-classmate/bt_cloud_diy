@@ -15,8 +15,8 @@
         "topthink/framework": "^6.0.0",
         "topthink/think-orm": "^2.0",
         "topthink/think-view": "^1.0",
-        "topthink/think-captcha": "^3.0",
-        "yzh52521/think-hashing": "^1.0"
+        "yzh52521/think-hashing": "^1.0",
+        "edward1108/edward-captcha": "^1.1"
     },
     "require-dev": {
         "symfony/var-dumper": "^4.2",
