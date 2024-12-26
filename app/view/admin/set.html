@@ -15,6 +15,19 @@ name="main"}
           role="form"
         >
           <div class="form-group">
+            <label>是否展示配置：</label>
+            <select
+              class="form-control"
+              name="linux_show"
+              default="{:config_get('linux_show')}"
+            >
+              <option value="0">关闭</option>
+              <option value="1">开启</option>
+            </select>
+            <font color="green">关闭后安装脚本页面将不展示脚本相关命令 </font>
+          </div>
+          {if config_get('linux_show')==1}
+          <div class="form-group">
             <label>宝塔Linux面板最新版本号：</label>
             <input
               type="text"
@@ -48,6 +61,7 @@ name="main"}
             />
             <font color="green">用于检测更新接口返回</font>
           </div>
+          {/if}
           <div class="form-group text-center">
             <input
               type="submit"
@@ -70,6 +84,19 @@ name="main"}
           class="form"
           role="form"
         >
+          <div class="form-group">
+            <label>是否展示配置：</label>
+            <select
+              class="form-control"
+              name="btwaf_show"
+              default="{:config_get('btwaf_show')}"
+            >
+              <option value="0">关闭</option>
+              <option value="1">开启</option>
+            </select>
+            <font color="green">关闭后安装脚本页面将不展示脚本相关命令 </font>
+          </div>
+          {if config_get('btwaf_show')==1}
           <div class="form-group">
             <label>版本信息解析：</label>
             <input type="text" name="waf_encryptiondata" class="form-control" />
@@ -120,6 +147,7 @@ name="main"}
               >用于检测更新接口返回，修改时需符合当前数据格式（请勿随意更改此处格式，以免无法正常获取更新信息）</font
             >
           </div>
+          {/if}
           <div class="form-group text-center">
             <input
               type="submit"
@@ -144,6 +172,19 @@ name="main"}
           class="form"
           role="form"
         >
+          <div class="form-group">
+            <label>是否展示配置：</label>
+            <select
+              class="form-control"
+              name="win_show"
+              default="{:config_get('win_show')}"
+            >
+              <option value="0">关闭</option>
+              <option value="1">开启</option>
+            </select>
+            <font color="green">关闭后安装脚本页面将不展示脚本相关命令 </font>
+          </div>
+          {if config_get('win_show')==1}
           <div class="form-group">
             <label>宝塔Windows面板最新版本号：</label>
             <input
@@ -178,6 +219,7 @@ name="main"}
             />
             <font color="green">用于检测更新接口返回</font>
           </div>
+          {/if}
           <div class="form-group text-center">
             <input
               type="submit"
@@ -200,6 +242,19 @@ name="main"}
           class="form"
           role="form"
         >
+          <div class="form-group">
+            <label>是否展示配置：</label>
+            <select
+              class="form-control"
+              name="btm_show"
+              default="{:config_get('btm_show')}"
+            >
+              <option value="0">关闭</option>
+              <option value="1">开启</option>
+            </select>
+            <font color="green">关闭后安装脚本页面将不展示脚本相关命令 </font>
+          </div>
+          {if config_get('btm_show')==1}
           <div class="form-group">
             <label>宝塔云监控最新版本号：</label>
             <input
@@ -232,6 +287,7 @@ name="main"}
               class="form-control"
             />
           </div>
+          {/if}
           <div class="form-group text-center">
             <input
               type="submit"
@@ -551,7 +607,7 @@ name="main"}
             <input
               type="text"
               name="username"
-              value="{:config_get('admin_username')}"
+              value=""
               class="form-control"
               required
             />
@@ -734,6 +790,9 @@ name="main"}
                   <option value="0">关闭</option>
                   <option value="1">开启</option>
                 </select>
+                <font color="green"
+                  >请在保存开启后立即填写下方的“登录密钥设置”，以防无法登录系统！</font
+                >
               </div>
               <div class="form-group text-center">
                 <input

@@ -9,6 +9,7 @@ use think\facade\Request;
 use think\facade\Cache;
 use app\lib\Btapi;
 use app\lib\Plugins;
+use yzh52521\Hashing\Hash;
 
 class Admin extends BaseController
 {
@@ -38,8 +39,8 @@ class Admin extends BaseController
             if (!captcha_check($code)) {
                 return json(['code' => -1, 'msg' => '验证码错误']);
             }
-            if ($username == config_get('admin_username') && $password == config_get('admin_password')) {
-                Db::name('log')->insert(['uid' => 0, 'action' => '登录后台', 'data' => 'IP:' . $this->clientip, 'addtime' => date("Y-m-d H:i:s")]);
+            if ($username == config_get('admin_username') && Hash::check($password, config_get('admin_password'))) {
+                Db::name('log')->insert(['uid' => 0, 'action' => '登录成功', 'data' => 'IP:' . $this->clientip, 'addtime' => date("Y-m-d H:i:s")]);
                 $session = md5($username . config_get('admin_password'));
                 $expiretime = time() + 2562000;
                 $token = authcode("{$username}\t{$session}\t{$expiretime}", 'ENCODE', config_get('syskey'));
@@ -47,6 +48,7 @@ class Admin extends BaseController
                 config_set('admin_lastlogin', date('Y-m-d H:i:s'));
                 return json(['code' => 0]);
             } else {
+                Db::name('log')->insert(['uid' => 0, 'action' => '登录失败', 'data' => 'IP:' . $this->clientip, 'addtime' => date("Y-m-d H:i:s")]);
                 return json(['code' => -1, 'msg' => '用户名或密码错误']);
             }
         }
@@ -135,13 +137,13 @@ class Admin extends BaseController
         config_set('admin_username', $params['username']);
 
         if (!empty($params['oldpwd']) && !empty($params['newpwd']) && !empty($params['newpwd2'])) {
-            if (config_get('admin_password') != $params['oldpwd']) {
-                return json(['code' => -1, 'msg' => '旧密码不正确']);
+            if (Hash::check($params['oldpwd'], config_get('admin_password')) != true) {
+                return json(['code' => -1, 'msg' => '密码不正确']);
             }
             if ($params['newpwd'] != $params['newpwd2']) {
                 return json(['code' => -1, 'msg' => '两次新密码输入不一致']);
             }
-            config_set('admin_password', $params['newpwd']);
+            config_set('admin_password', Hash::make($params['newpwd']));
         }
         cache('configs', NULL);
         cookie('admin_token', null);
