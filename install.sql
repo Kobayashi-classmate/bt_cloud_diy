@@ -28,9 +28,9 @@ INSERT INTO `cloud_config` (`key`, `value`) VALUES
 ('update_date_btm', '2024-04-24'),
 ('updateall_type', '0'),
 ('syskey', ''),
-('waf_new_version', '5.1'),
+('waf_new_version', '5.2'),
 ('waf_update_msg', '暂无更新日志'),
-('waf_update_datetime', '2024-12-19 10:53:31'),
+('waf_update_datetime', '2025-01-02 16:58:19'),
 ('login_key', '0');
 
 
