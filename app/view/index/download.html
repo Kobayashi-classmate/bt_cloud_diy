@@ -32,7 +32,7 @@
             </div>
             <div class="disflex flex_lrcenter mt_50 install-list">
               {if config_get('linux_show')==0 && config_get('btm_show')==0 &&
-              config_get('win_show')==0}
+              config_get('win_show')==0 && config_get('aaPanel_show')==0}
               <div class="install-box linux">
                 <div class="img">
                   <img src="/static/images/prd_1_03.png" />
@@ -104,8 +104,9 @@
               </div>
               {/if}
             </div>
-            {if config_get('btm_show')==1}
+			{if config_get('btm_show') ==1 || config_get('aaPanel_show') ==1 }
             <div class="disflex flex_lrcenter mt_30 install-list">
+              {if config_get('btm_show') ==1 }
               <div class="install-box monitor">
                 <div class="img">
                   <img
@@ -125,6 +126,26 @@
                   </div>
                 </div>
               </div>
+              {/if} {if config_get('aaPanel_show') ==1 }
+              <div class="install-box monitor">
+                <div class="img">
+                  <img src="/static/images/aapanel.png" style="height: 96px" />
+                </div>
+                <div class="cont">
+                  <div class="top">
+                    <div class="title">
+                      aaPanel {:config_get('new_version_en')}
+                    </div>
+                    <div class="desc">宝塔面板国际版</div>
+                  </div>
+                  <div class="bottom">
+                    <a class="btn" href="javascript:;" id="goInstallAaPanel"
+                      >查看安装脚本</a
+                    >
+                  </div>
+                </div>
+              </div>
+              {/if}
             </div>
             {/if}
           </div>
@@ -313,6 +334,112 @@
           </div>
         </div>
       </div>
+      {/if} {if config_get('btwaf_show')==1}
+      <div class="d4" id="instal-monitor" style="background-color: #edf6ef">
+        <div class="wrap">
+          <div class="wrap-title">
+            <div class="text" style="margin-right: 12px">
+              云WAF{:config_get('waf_new_version')}安装脚本
+            </div>
+          </div>
+          <div class="desc">
+            使用 SSH 连接工具，如
+            <a
+              class="link"
+              href="https://www.putty.org/"
+              target="_blank"
+              rel="noreferrer"
+              >PUTTY</a
+            >
+            连接到您的 Linux 服务器后，根据系统执行相应命令开始安装（大约2分钟完成云WAF安装）：
+          </div>
+          <div class="install-code">
+            <span class="osname">单机版脚本</span>
+            <div class="code-cont">
+              <div class="command" title="点击复制安装脚本">
+                URL=https://download.bt.cn/cloudwaf/scripts/install_cloudwaf.sh && if [ -f /usr/bin/curl ];then curl -sSO "$URL"
+                ;else wget -O install_cloudwaf.sh "$URL";fi;bash install_cloudwaf.sh
+              </div>
+              <span
+                class="ico-copy"
+                title="点击复制安装脚本"
+                data-clipboard-text="URL=https://download.bt.cn/cloudwaf/scripts/install_cloudwaf.sh && if [ -f /usr/bin/curl ];then curl -sSO "$URL" ;else wget -O install_cloudwaf.sh "$URL";fi;bash install_cloudwaf.sh"
+                >复制</span
+              >
+            </div>
+          </div>
+          <div class="install-code">
+            <span class="osname">集群版脚本
+            </span>
+            <div class="code-cont">
+              <div class="command" title="点击复制更新脚本">
+                URL=https://download.bt.cn/cloudwaf/scripts/install_waf_master.sh && if [ -f /usr/bin/curl ];then curl -sSO
+                "$URL" ;else wget -O install_waf_master.sh "$URL";fi;bash install_waf_master.sh
+              </div>
+              <span
+                class="ico-copy"
+                title="点击复制更新脚本"
+                data-clipboard-text="URL=https://download.bt.cn/cloudwaf/scripts/install_waf_master.sh && if [ -f /usr/bin/curl ];then curl -sSO "$URL" ;else wget -O install_waf_master.sh "$URL";fi;bash install_waf_master.sh"
+                >复制</span
+              >
+            </div>
+          </div>
+          <div class="tips" style="color: orangered; font-weight: 700">
+            <p>注意：已经安装了宝塔面板的机器，不要再安装云WAF，在宝塔面板上安装使用Nginx防火墙即可。</p>
+            <p style="text-indent: 3em">堡塔云WAF需要一台独立服务器安装部署。</p>
+            <p style="text-indent: 3em">安装完成后推荐使用Chrome、火狐、edge浏览器，国产浏览器（极速模式）访问登录系统</p>
+          </div>
+        </div>
+      </div>
+      {/if} {if config_get('aaPanel_show') ==1 }
+      <div class="d4" id="instal-aapanel">
+        <div class="wrap">
+          <div class="wrap-title">
+            <div class="text">
+              aaPanel {:config_get('new_version_en')} install script
+            </div>
+          </div>
+          <div class="desc">
+            <p>It is recommended that you use Ubuntu22.04 to install aaPanel</p>
+          </div>
+          <div class="install-code">
+            <span class="osname">Instarll script</span>
+            <div class="code-cont">
+              <div
+                class="command"
+                title="Copy successfully, please paste it to the server installation"
+              >
+                URL={$siteurl}/install/install_7.0_en.sh && if [ -f
+                /usr/bin/curl ];then curl -ksSO $URL ;else wget -O
+                install_7.0_en.sh $URL;fi;bash install_7.0_en.sh
+              </div>
+              <span
+                class="ico-copy"
+                title="Copy successfully, please paste it to the server installation"
+                data-clipboard-text="URL={$siteurl}/install/install_7.0_en.sh && if [ -f /usr/bin/curl ];then curl -ksSO $URL ;else wget -O install_7.0_en.sh $URL;fi;bash install_7.0_en.sh"
+                >复制</span
+              >
+            </div>
+          </div>
+          <div class="install-code">
+            <span class="osname">Upgrade script</span>
+            <div class="code-cont">
+              <div
+                class="command"
+                title="Copy successfully, please paste it to the server installation"
+              >
+                curl {$siteurl}/install/update_7.x_en.sh|bash
+              </div>
+              <span
+                class="ico-copy"
+                title="Copy successfully, please paste it to the server installation"
+                data-clipboard-text="curl {$siteurl}/install/update_7.x_en.sh|bash"
+                >复制</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
       {/if}
       <div class="animate-bg"></div>
     </div>
@@ -401,6 +528,10 @@
 
         $("#goInstallMonitor").click(function () {
           scrollTop("#instal-monitor");
+        });
+
+        $("#goInstallAaPanel").click(function () {
+          scrollTop("#instal-aapanel");
         });
 
         function GetRequest() {

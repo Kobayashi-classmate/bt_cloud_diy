@@ -931,7 +931,7 @@ Install_Bt(){
 		echo "True" > /www/server/panel/data/not_workorder.pl
 	fi
 	if [ ! -f /www/server/panel/data/userInfo.json ]; then
-		echo "{\"uid\":1,\"username\":\"Administrator\",\"address\":\"127.0.0.1\",\"serverid\":\"1\",\"access_key\":\"test\",\"secret_key\":\"123456\",\"ukey\":\"123456\",\"state\":1}" > /www/server/panel/data/userInfo.json
+		echo "{\"uid\":1,\"username\":\"AdminUser\",\"address\":\"127.0.0.1\",\"access_key\":\"test\",\"secret_key\":\"123456\",\"ukey\":\"123456\",\"state\":1}" > /www/server/panel/data/userInfo.json
 	fi
 	if [ ! -f /www/server/panel/data/panel_nps.pl ]; then
 		echo "" > /www/server/panel/data/panel_nps.pl
@@ -1288,6 +1288,9 @@ echo -e " "
 echo -e "=========================打开面板前请看==========================="
 echo -e ""
 echo -e " 【云服务器】请在安全组放行 $panelPort 端口"
+echo -e " 因默认启用自签证书https加密访问，浏览器将提示不安全"
+echo -e " 点击【高级】-【继续访问】或【接受风险并继续】访问"
+echo -e " 教程：https://www.bt.cn/bbs/thread-117246-1-1.html"
 echo -e "" 
 echo -e "=================================================================="
 endTime=`date +%s`

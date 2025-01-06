@@ -10,9 +10,12 @@ class CheckAdmin
     {
         if (!request()->islogin) {
             if ($request->isAjax() || !$request->isGet()) {
-                return json(['code'=>-1, 'msg'=>'未登录'])->code(401);
+                return response('404 Not Found')->code(404);
             }
-            return response('404 Not Found')->code(404);
+            if (config_get('login_key') == 1) {
+                return redirect('../' . config_get('backaddress') . '/login?access_key=' . config_get('access_key'));
+            }
+            return redirect('../' . config_get('backaddress') . '/login');
         }
         return $next($request);
     }
