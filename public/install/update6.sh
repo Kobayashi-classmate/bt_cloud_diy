@@ -103,7 +103,7 @@ fi
 setup_path=/www
 version=$(curl -Ss --connect-timeout 5 -m 2 $Btapi_Url/api/panel/get_version)
 if [ -z "$VERSION_CHECK" ];then
-	version='9.3.0'
+	version='9.4.0'
 fi
 armCheck=$(uname -m|grep arm)
 if [ "${armCheck}" ];then
@@ -254,7 +254,7 @@ if [ ! -f /www/server/panel/data/not_workorder.pl ]; then
 	echo "True" > /www/server/panel/data/not_workorder.pl
 fi
 if [ ! -f /www/server/panel/data/userInfo.json ]; then
-	echo "{\"uid\":1,\"username\":\"AdminUser\",\"address\":\"127.0.0.1\",\"access_key\":\"test\",\"secret_key\":\"123456\",\"ukey\":\"123456\",\"state\":1}" > /www/server/panel/data/userInfo.json
+	echo "{\"uid\":1,\"username\":\"Administrator\",\"address\":\"127.0.0.1\",\"access_key\":\"test\",\"secret_key\":\"123456\",\"ukey\":\"123456\",\"state\":1}" > /www/server/panel/data/userInfo.json
 fi
 if [ ! -f /www/server/panel/data/panel_nps.pl ]; then
 	echo "" > /www/server/panel/data/panel_nps.pl

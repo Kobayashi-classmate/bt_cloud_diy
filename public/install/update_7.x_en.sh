@@ -987,7 +987,7 @@ rm -f /www/server/panel/class_v2/__pycache__/*.pyc
 
 rm -f /www/server/panel/class/*.so
 if [ ! -f /www/server/panel/data/userInfo.json ]; then
-    echo "{\"id\":1,\"uid\":1,\"last_login_ip\":\"127.0.0.1\",\"username\":\"AdminUser\",\"email\":\"admin@aapanel.com\",\"status\":1,\"token\":\"aaa.bbb.ccc\"}" > /www/server/panel/data/userInfo.json
+    echo "{\"id\":1,\"uid\":1,\"last_login_ip\":\"127.0.0.1\",\"username\":\"Administrator\",\"email\":\"admin@aapanel.com\",\"status\":1,\"token\":\"aaa.bbb.ccc\"}" > /www/server/panel/data/userInfo.json
 fi
 
 grep "www:x" /etc/passwd > /dev/null

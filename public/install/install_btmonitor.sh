@@ -422,7 +422,7 @@ EOF
 	ln -sf /etc/init.d/btm /usr/bin/btm
 
 	if [ ! -f $monitor_path/data/user.json ]; then
-		echo "{\"uid\":1,\"username\":\"AdminUser\",\"ip\":\"127.0.0.1\",\"server_id\":\"1\",\"access_key\":\"test\",\"secret_key\":\"123456\"}" > $monitor_path/data/user.json
+		echo "{\"uid\":1,\"username\":\"Administrator\",\"ip\":\"127.0.0.1\",\"server_id\":\"1\",\"access_key\":\"test\",\"secret_key\":\"123456\"}" > $monitor_path/data/user.json
 	fi
 	if [ -f $monitor_path/core/include/c_loader/PluginLoader.so ]; then
 		rm -f $monitor_path/core/include/c_loader/PluginLoader.so
