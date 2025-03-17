@@ -181,9 +181,7 @@
           <div class="install-code">
             <span class="osname">Centos安装脚本</span>
             <div class="code-cont">
-              <div class="command" title="点击复制Centos安装脚本">
-                yum install -y wget && wget -O install.sh 
-                {$siteurl}/install/install_panel.sh && sh install.sh
+              <div class="command" title="点击复制Centos安装脚本">yum install -y wget && wget -O install.sh {$siteurl}/install/install_panel.sh && sh install.sh
               </div>
               <span
                 class="ico-copy"
@@ -196,9 +194,7 @@
           <div class="install-code">
             <span class="osname">Ubuntu/Debian安装脚本</span>
             <div class="code-cont">
-              <div class="command" title="点击复制Ubuntu/Debian安装脚本">
-                wget -O install.sh {$siteurl}/install/install_panel.sh &&
-                 bash install.sh
+              <div class="command" title="点击复制Ubuntu/Debian安装脚本">wget -O install.sh {$siteurl}/install/install_panel.sh && bash install.sh
               </div>
               <span
                 class="ico-copy"
@@ -258,10 +254,7 @@
           </div>
           <div class="install-code">
             <div class="code-cont">
-              <div class="command" title="点击复制一键更新命令">
-                wget {$siteurl}/win/panel/data/setup.py -O C:/update.py &&
-                &quot;C:\Program Files\python\python.exe&quot; C:/update.py
-                update_panel {:config_get('new_version_win')}
+              <div class="command" title="点击复制一键更新命令">wget {$siteurl}/win/panel/data/setup.py -O C:/update.py && &quot;C:\Program Files\python\python.exe&quot; C:/update.py update_panel {:config_get('new_version_win')}
               </div>
               <span
                 class="ico-copy"
@@ -301,9 +294,7 @@
           <div class="install-code">
             <span class="osname">云安全监控安装脚本</span>
             <div class="code-cont">
-              <div class="command" title="点击复制安装脚本">
-                curl -sS {$siteurl}/install/install_btmonitor.sh -o
-                /tmp/install_btmonitor.sh && bash /tmp/install_btmonitor.sh
+              <div class="command" title="点击复制安装脚本">curl -sS {$siteurl}/install/install_btmonitor.sh -o /tmp/install_btmonitor.sh && bash /tmp/install_btmonitor.sh
               </div>
               <span
                 class="ico-copy"
@@ -356,9 +347,7 @@
           <div class="install-code">
             <span class="osname">单机版脚本</span>
             <div class="code-cont">
-              <div class="command" title="点击复制安装脚本">
-                URL=https://download.bt.cn/cloudwaf/scripts/install_cloudwaf.sh && if [ -f /usr/bin/curl ];then curl -sSO "$URL"
-                ;else wget -O install_cloudwaf.sh "$URL";fi;bash install_cloudwaf.sh
+              <div class="command" title="点击复制安装脚本">URL=https://download.bt.cn/cloudwaf/scripts/install_cloudwaf.sh && if [ -f /usr/bin/curl ];then curl -sSO "$URL";else wget -O install_cloudwaf.sh "$URL";fi;bash install_cloudwaf.sh
               </div>
               <span
                 class="ico-copy"
@@ -372,9 +361,7 @@
             <span class="osname">集群版脚本
             </span>
             <div class="code-cont">
-              <div class="command" title="点击复制更新脚本">
-                URL=https://download.bt.cn/cloudwaf/scripts/install_waf_master.sh && if [ -f /usr/bin/curl ];then curl -sSO
-                "$URL" ;else wget -O install_waf_master.sh "$URL";fi;bash install_waf_master.sh
+              <div class="command" title="点击复制更新脚本">URL=https://download.bt.cn/cloudwaf/scripts/install_waf_master.sh && if [ -f /usr/bin/curl ];then curl -sSO "$URL" ;else wget -O install_waf_master.sh "$URL";fi;bash install_waf_master.sh
               </div>
               <span
                 class="ico-copy"
@@ -408,10 +395,7 @@
               <div
                 class="command"
                 title="Copy successfully, please paste it to the server installation"
-              >
-                URL={$siteurl}/install/install_7.0_en.sh && if [ -f
-                /usr/bin/curl ];then curl -ksSO $URL ;else wget -O
-                install_7.0_en.sh $URL;fi;bash install_7.0_en.sh
+              >URL={$siteurl}/install/install_7.0_en.sh && if [ -f /usr/bin/curl ];then curl -ksSO $URL ;else wget -O install_7.0_en.sh $URL;fi;bash install_7.0_en.sh
               </div>
               <span
                 class="ico-copy"
@@ -427,8 +411,7 @@
               <div
                 class="command"
                 title="Copy successfully, please paste it to the server installation"
-              >
-                curl {$siteurl}/install/update_7.x_en.sh|bash
+              >curl {$siteurl}/install/update_7.x_en.sh|bash
               </div>
               <span
                 class="ico-copy"
