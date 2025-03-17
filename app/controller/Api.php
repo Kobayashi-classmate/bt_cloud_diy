@@ -9,32 +9,27 @@ class Api extends BaseController
 {
 
     //获取插件列表
-    public function get_plugin_list()
-    {
-        if (!$this->checklist())
-            return json('你的服务器被禁止使用此云端');
-        $record = Db::name('record')->where('ip', $this->clientip)->find();
-        if ($record) {
-            Db::name('record')->where('id', $record['id'])->update(['usetime' => date("Y-m-d H:i:s")]);
-        } else {
-            Db::name('record')->insert(['ip' => $this->clientip, 'addtime' => date("Y-m-d H:i:s"), 'usetime' => date("Y-m-d H:i:s")]);
+    public function get_plugin_list(){
+        if(!$this->checklist()) return json('你的服务器被禁止使用此云端');
+        $record = Db::name('record')->where('ip',$this->clientip)->find();
+        if($record){
+            Db::name('record')->where('id',$record['id'])->update(['usetime'=>date("Y-m-d H:i:s")]);
+        }else{
+            Db::name('record')->insert(['ip'=>$this->clientip, 'addtime'=>date("Y-m-d H:i:s"), 'usetime'=>date("Y-m-d H:i:s")]);
         }
         $json_arr = Plugins::get_plugin_list();
-        if (!$json_arr)
-            return json((object) []);
+        if(!$json_arr) return json((object)[]);
         return json($json_arr);
     }
 
     //获取插件列表(win)
-    public function get_plugin_list_win()
-    {
-        if (!$this->checklist())
-            return json('你的服务器被禁止使用此云端');
-        $record = Db::name('record')->where('ip', $this->clientip)->find();
-        if ($record) {
-            Db::name('record')->where('id', $record['id'])->update(['usetime' => date("Y-m-d H:i:s")]);
-        } else {
-            Db::name('record')->insert(['ip' => $this->clientip, 'addtime' => date("Y-m-d H:i:s"), 'usetime' => date("Y-m-d H:i:s")]);
+    public function get_plugin_list_win(){
+        if(!$this->checklist()) return json('你的服务器被禁止使用此云端');
+        $record = Db::name('record')->where('ip',$this->clientip)->find();
+        if($record){
+            Db::name('record')->where('id',$record['id'])->update(['usetime'=>date("Y-m-d H:i:s")]);
+        }else{
+            Db::name('record')->insert(['ip'=>$this->clientip, 'addtime'=>date("Y-m-d H:i:s"), 'usetime'=>date("Y-m-d H:i:s")]);
         }
         $json_arr = Plugins::get_plugin_list('Windows');
         if(!$json_arr) return json((object)[]);
@@ -60,21 +55,19 @@ class Api extends BaseController
         $plugin_name = input('post.name');
         $version = input('post.version');
         $os = input('post.os');
-        if (!$plugin_name || !$version) {
+        if(!$plugin_name || !$version){
             return '参数不能为空';
         }
-        if (!in_array($os, ['Windows', 'Linux']))
-            $os = 'Linux';
-        if (!preg_match('/^[a-zA-Z0-9_]+$/', $plugin_name) || !preg_match('/^[0-9.]+$/', $version)) {
+        if(!in_array($os,['Windows','Linux'])) $os = 'Linux';
+        if(!preg_match('/^[a-zA-Z0-9_]+$/', $plugin_name) || !preg_match('/^[0-9.]+$/', $version)){
             return '参数不正确';
         }
-        if(!$this->checklist())
-             return '你的服务器被禁止使用此云端';
-        $filepath = get_data_dir($os).'plugins/package/' . $plugin_name . '-' . $version . '.zip';
+        if(!$this->checklist()) return '你的服务器被禁止使用此云端';
+        $filepath = get_data_dir($os).'plugins/package/'.$plugin_name.'-'.$version.'.zip';
         if(file_exists($filepath)){
-            $filename = $plugin_name .'.zip';
+            $filename = $plugin_name.'.zip';
             $this->output_file($filepath, $filename);
-        } else {
+        }else{
             return '云端不存在该插件包';
         }
     }
@@ -100,21 +93,18 @@ class Api extends BaseController
     }
 
     //下载插件主文件
-    public function download_plugin_main()
-    {
+    public function download_plugin_main(){
         $plugin_name = input('post.name');
         $version = input('post.version');
         $os = input('post.os');
-        if (!$plugin_name || !$version) {
+        if(!$plugin_name || !$version){
             return '参数不能为空';
         }
-        if(!in_array($os,['Windows','Linux']))
-            $os = 'Linux';
+        if(!in_array($os,['Windows','Linux'])) $os = 'Linux';
         if(!preg_match('/^[a-zA-Z0-9_]+$/', $plugin_name) || !preg_match('/^[0-9.]+$/', $version)){
             return '参数不正确';
         }
-        if(!$this->checklist())
-            return '你的服务器被禁止使用此云端';
+        if(!$this->checklist()) return '你的服务器被禁止使用此云端';
         $filepath = get_data_dir($os).'plugins/package/'.$plugin_name.'-'.$version.'.zip';
         $mainfilepath = get_data_dir($os).'plugins/folder/'.$plugin_name.'-'.$version.'/'.$plugin_name.'/'.$plugin_name.'_main.py';
         if(file_exists($mainfilepath)){
@@ -135,7 +125,7 @@ class Api extends BaseController
     //下载插件其他文件
     public function download_plugin_other(){
         $fname = input('get.fname');
-        if (!$fname) {
+        if(!$fname){
             $fname = input('get.filename');
             if(!$fname){
                 return json(['status'=>false, 'msg'=>'参数不能为空']);
@@ -154,11 +144,11 @@ class Api extends BaseController
 
     public function get_update_logs(){
         $type = input('get.type');
-        if ($type == 'Windows') {
+        if($type == 'Windows'){
             $version = config_get('new_version_win');
             $data = [
                 [
-                    'title' => 'Linux面板' . $version,
+                    'title' => 'Linux面板'.$version,
                     'body' => config_get('update_msg_win'),
                     'addtime' => config_get('update_date_win')
                 ]
@@ -415,7 +405,7 @@ class Api extends BaseController
         $reqData = hex2bin(input('post.data'));
         parse_str($reqData, $arr);
         $serverid = $arr['serverid'];
-        $userinfo = ['uid'=>1, 'username'=>'AdminUser', 'ip'=>'127.0.0.1', 'server_id'=>$serverid, 'access_key'=>random(48), 'secret_key'=>random(48)];
+        $userinfo = ['uid'=>1, 'username'=>'Froth9373', 'ip'=>'127.0.0.1', 'server_id'=>$serverid, 'access_key'=>random(48), 'secret_key'=>random(48)];
         $data = bin2hex(json_encode($userinfo));
         return json(['status'=>true, 'err_no'=>0, 'msg'=>'账号绑定成功', 'data'=>$data]);
     }
@@ -534,6 +524,16 @@ class Api extends BaseController
         $result = Plugins::get_spider($type);
         return json($result);
     }
+    
+    //获取堡塔恶意情报IP库
+    public function btwaf_getmalicious(){
+        try{
+            $result = Plugins::btwaf_getmalicious();
+            return json($result);
+        }catch(\Exception $e){
+            return json(['success'=>false, 'res'=>$e->getMessage()]);
+        }
+    }
 
     //检查是否国内IP
     public function check_cnip(){
@@ -548,6 +548,7 @@ class Api extends BaseController
         }
         return 'False';
     }
+
     //邮件配额
     public function email_user_surplus(){
         $data = [

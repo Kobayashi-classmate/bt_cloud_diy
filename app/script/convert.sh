@@ -1,14 +1,14 @@
 #!/bin/bash
 
-Linux_Version="9.4.0"
+Linux_Version="9.5.0"
 Windows_Version="8.2.2"
-Aapanel_Version="7.0.13"
+Aapanel_Version="7.0.16"
 Btm_Version="2.3.0"
 
 FILES=(
 public/install/src/panel6.zip
 public/install/update/LinuxPanel-${Linux_Version}.zip
-public/install/install_6.0.sh
+public/install/install_panel.sh
 public/install/update_panel.sh
 public/install/update6.sh
 public/win/install/panel_update.py
@@ -21,7 +21,6 @@ public/install/update_btmonitor.sh
 public/install/src/panel_7_en.zip
 public/install/update/LinuxPanel_EN-${Aapanel_Version}.zip
 public/install/install_7.0_en.sh
-public/install/install_pro_en.sh
 public/install/update_7.x_en.sh
 )
 

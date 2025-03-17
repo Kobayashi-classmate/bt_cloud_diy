@@ -32,7 +32,7 @@ class Admin extends BaseController
             $username = input('post.username', null, 'trim');
             $password = input('post.password', null, 'trim');
             $captcha = input('post.captcha', null, 'trim');
-
+    
             if (empty($username) || empty($password)) {
                 return json(['code' => -1, 'msg' => '用户名或密码不能为空']);
             }
@@ -192,8 +192,7 @@ class Admin extends BaseController
         $json_arr = Plugins::get_plugin_list('Windows');
         if($json_arr){
             foreach($json_arr['type'] as $type){
-                if($type['title'] == '一键部署')
-                    continue;
+                if($type['title'] == '一键部署') continue;
                 $typelist[$type['id']] = $type['title'];
             }
         }
